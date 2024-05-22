@@ -8,6 +8,8 @@ import {
 import Homepage from "./pages/Homepage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import UserProfile from "./pages/UserProfile";
+import UserDashboard from "./pages/UserDashboard";
 
 function App() {
   const action = useNavigationType();
@@ -51,6 +53,8 @@ function App() {
       <Route path="/" element={<Homepage />} />
       <Route path="/sign-in" element={<SignIn />} />
       <Route path="/sign-up" element={<SignUp />} />
+      <Route path="/user-profile" element={<UserProfile />} />
+      <Route path="/user-dashboard" element={<UserDashboard />} />
     </Routes>
   );
 }
