@@ -1,0 +1,168 @@
+.icon-song {
+  width: 40px;
+  height: 40px;
+  margin-top: 15px;
+  margin-left: 5px;
+}
+.icon-artist {
+  width: 40px;
+  height: 40px;
+  margin-top: 15px;
+  margin-left: -20px;
+}
+.icon-play {
+  width: 10px;
+  height: 10px;
+}
+.add-song-button {
+  background-color: #32aaf0;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 104px;
+  height: 40px;
+}
+.add-playlist-button {
+  background-color: #32aaf0;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 150px;
+  height: 40px;
+}
+.play-button {
+  background-color: #1c7d90;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 91px;
+  height: 40px;
+}
+.add-song-button:hover {
+  background-color: #4fafe7;
+}
+.play-button:hover {
+  background-color: #229ab3;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.title-with-icon {
+  display: flex;
+  align-items: center;
+}
+.header-container2 {
+  width: calc(100% - 40px);
+  margin: 0 auto;
+  padding: 0px 20px;
+  margin-top: 10px;
+  padding-bottom: 5px;
+  align-self: stretch;
+  border-bottom: 1px solid var(--color-gray-100);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  /* padding: var(--padding-3xs); */
+  top: 0;
+  z-index: 99;
+  position: sticky;
+  text-align: left;
+  font-size: var(--font-size-5xl);
+  color: var(--color-black);
+  font-family: var(--font-poppins);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.songs-list {
+  width: 100%;
+  border-collapse: collapse;
+  padding: 15px 20px;
+}
+.songs-list table {
+  width: 100%;
+  border: 2px solid #3ba1b5;
+}
+
+.songs-list th,
+.songs-list td {
+  padding: 8px;
+}
+
+.songs-list th.title-col,
+.songs-list td.title-col {
+  width: 400px;
+}
+
+.songs-list th.length-col,
+.songs-list td.length-col {
+  width: 100px;
+}
+
+.songs-list th.artist-col,
+.songs-list td.astist-col {
+  width: 100px;
+}
+
+.songs-list th.album-col,
+.songs-list td.album-col {
+  width: 100px;
+}
+.songs-list th.delete-col,
+.songs-list td.delete-col {
+  width: 70px;
+  text-align: center;
+}
+
+.songs-list th {
+  background-color: #b9ecf6;
+}
+
+.songs-list tbody tr:nth-child(even) {
+  background-color: #daeff3;
+}
+
+.songs-list tbody tr:hover {
+  background-color: #cce3e8;
+}
+
+.delete-button {
+  background-color: #ff313b;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.delete-button:hover {
+  background-color: #d52b33;
+}
+
+.add-to-playlist-button {
+  background-color: #1ac84b;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 104px;
+}
+.add-to-playlist-button:hover {
+  background-color: #16a03d;
+}
+.playlist-details-link {
+  text-decoration: none;
+}

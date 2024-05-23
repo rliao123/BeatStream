@@ -10,6 +10,14 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import UserProfile from "./pages/UserProfile";
 import UserDashboard from "./pages/UserDashboard";
+import Song from "./pages/Song";
+import AddSong from "./pages/AddSong";
+import CreatePlaylist from "./pages/CreatePlaylist";
+import EditPlaylist from "./pages/EditPlaylist";
+import ViewPlaylistDetails from "./pages/ViewPlaylistDetails";
+import AddToPlaylist from "./pages/AddToPlaylist";
+import Artist from "./pages/Artist";
+import Playlist from "./pages/Playlist";
 
 function App() {
   const action = useNavigationType();
@@ -55,6 +63,14 @@ function App() {
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/user-profile" element={<UserProfile />} />
       <Route path="/user-dashboard" element={<UserDashboard />} />
+      <Route path="/songs" element={<Song />} />
+      <Route path="/add-song" element={<AddSong />} />
+      <Route path="/create-playlist" element={<CreatePlaylist />} />
+      <Route path="/edit-playlist" element={<EditPlaylist />} />
+      <Route path="/playlist-details" element={<ViewPlaylistDetails />} />
+      <Route path="/add-to-playlist" element={<AddToPlaylist />} />
+      <Route path="/artists" element={<Artist />} />
+      <Route path="/playlists" element={<Playlist />} />
     </Routes>
   );
 }

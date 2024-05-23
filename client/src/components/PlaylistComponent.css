@@ -1,0 +1,31 @@
+/* components/PlaylistComponent.css */
+.playlist-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  cursor: pointer;
+  margin-left: 60px;
+}
+
+.playlist-item {
+  background-color: #daeff3;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  color: white;
+  width: 300px;
+  height: 300px;
+}
+
+.playlist-image img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.playlist-name {
+  font-size: 16px;
+  color: #000000;
+}

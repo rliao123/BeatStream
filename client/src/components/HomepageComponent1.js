@@ -17,7 +17,7 @@ const HomepageComponent1 = () => {
             favorite tunes, create playlists, and stream your tracks anytime,
             anywhere.{" "}
           </p>
-          <Link to="/signup" className="signup-link">
+          <Link to="/sign-up" className="signup-link">
             <Button variant="contained" className="get-started">
               Get Started
             </Button>
