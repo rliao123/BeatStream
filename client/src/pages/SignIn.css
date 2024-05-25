@@ -33,6 +33,34 @@
   margin-top: 0px;
 }
 
+.custom-textfield .MuiOutlinedInput-root {
+  height: 45px; /* Adjust height as needed */
+  padding: 0px; /* Adjust padding to maintain the same border and padding size */
+}
+
+.custom-textfield .MuiOutlinedInput-root.Mui-error fieldset {
+  border-color: red; /* Customize error border color */
+  border-width: 2px; /* Ensure the error border is thicker */
+  top: -10px; /* Adjust this value to align the red border correctly */
+  height: 51px;
+}
+
+.custom-textfield .MuiOutlinedInput-root {
+  & fieldset {
+    border-color: transparent; /* Change this to customize border color */
+  }
+  &:hover fieldset {
+    border-color: transparent; /* Change this to customize hover border color */
+  }
+  &.Mui-focused fieldset {
+    border-color: transparent; /* Change this to customize focused border color */
+  }
+}
+
+.custom-textfield {
+  width: 100%;
+}
+
 .form-group {
   margin-bottom: 10px;
   text-align: left;
@@ -72,4 +100,5 @@
 .signup-link {
   color: #32aaf0;
   text-decoration: none;
+  cursor: pointer;
 }

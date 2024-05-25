@@ -9,7 +9,7 @@ const HomepageComponent2 = () => {
           <img src="/upload.png" alt="Music" className="image" />
         </div>
         <div className="content-container">
-          <img src="/upload-circle.png" alt="Upload Icon" className="icon" />
+          <img src="/upload-circle.png" alt="Upload Icon" className="iconic" />
           <h2>Upload Songs</h2>
           <p>
             Easily upload your favorite tracks to BeatStream with just a few
@@ -23,7 +23,7 @@ const HomepageComponent2 = () => {
           <img
             src="/create-playlist-circle.png"
             alt="Upload Icon"
-            className="icon"
+            className="iconic"
           />
           <h2>Create Playlists</h2>
           <p>
@@ -43,7 +43,7 @@ const HomepageComponent2 = () => {
           <img src="/browse.png" alt="Music" className="image" />
         </div>
         <div className="content-container">
-          <img src="/browse-circle.png" alt="Upload Icon" className="icon" />
+          <img src="/browse-circle.png" alt="Upload Icon" className="iconic" />
           <h2>Browse your library</h2>
           <p>
             Explore and manage your personal music collection effortlessly

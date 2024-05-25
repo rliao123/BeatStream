@@ -14,43 +14,44 @@ import axios from "axios";
 
 const Header = () => {
   const navigate = useNavigate();
-  // const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  //   const isLoggedIn = localStorage.getItem("isLoggedIn");
-  const isLoggedIn = true;
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  console.log("hi: ", isLoggedIn);
+  //const isLoggedIn = true;
   // const isMerchant = localStorage.getItem("isOwner");
 
-  // const onSignInClick = () => {
-  //   navigate("/login");
-  // };
+  const onSignInClick = () => {
+    navigate("/login");
+  };
 
-  // const handleCloseSnackbar = () => {
-  //   setOpenSnackbar(false);
-  // };
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
 
-  // const onLogoutClick = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:8080/logout");
-  //     console.log("Login Successful:", response.data);
-  //     setOpenSnackbar(true);
+  const onLogoutClick = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/logout");
+      console.log("Login Successful:", response.data);
+      setOpenSnackbar(true);
 
-  //     if (isMerchant === 'false') {
-  //       localStorage.removeItem("username");
-  //     } else {
-  //       localStorage.removeItem("restaurant_id");
-  //       localStorage.removeItem("email");
-  //     }
-  //     localStorage.removeItem("isOwner");
-  //     localStorage.removeItem("isLoggedIn");
+      // if (isMerchant === 'false') {
+      //   localStorage.removeItem("username");
+      // } else {
+      //   localStorage.removeItem("restaurant_id");
+      //   localStorage.removeItem("email");
+      // }
+      localStorage.removeItem("email");
+      localStorage.removeItem("isLoggedIn");
 
-  //     Cookies.remove("jwt"); // Remove jwt cookie
-  //     setTimeout(() => {
-  //       navigate("/login");
-  //     }, 2000);
-  //   } catch (error) {
-  //     console.error("Logout Failed:", error);
-  //   }
-  // };
+      Cookies.remove("jwt"); // Remove jwt cookie
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    } catch (error) {
+      console.error("Logout Failed:", error);
+    }
+  };
 
   const onLogoContainerClick = () => {
     navigate("/");
@@ -147,13 +148,13 @@ const Header = () => {
                   textTransform: "none",
                   color: "#fdfbfa",
                   fontSize: "14",
-                  background: "#202020",
-                  borderRadius: "10px",
-                  "&:hover": { background: "#202020" },
-                  width: 96,
-                  height: 49,
+                  background: "#3BA1B5",
+                  borderRadius: "20px",
+                  "&:hover": { background: "#3BA1B5" },
+                  width: 80,
+                  height: 42,
                 }}
-                // onClick={onLogoutClick} // Call onLogoutClick function for logout
+                onClick={onLogoutClick} // Call onLogoutClick function for logout
               >
                 Logout
               </Button>
@@ -166,11 +167,11 @@ const Header = () => {
                   textTransform: "none",
                   color: "#fdfbfa",
                   fontSize: "14",
-                  background: "#202020",
-                  borderRadius: "10px",
-                  "&:hover": { background: "#202020" },
-                  width: 96,
-                  height: 49,
+                  background: "#3BA1B5",
+                  borderRadius: "20px",
+                  "&:hover": { background: "#3BA1B5" },
+                  width: 80,
+                  height: 42,
                 }}
                 // onClick={onSignInClick}
               >
@@ -180,7 +181,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* <Snackbar
+        <Snackbar
           open={openSnackbar}
           autoHideDuration={6000}
           onClose={handleCloseSnackbar}
@@ -195,7 +196,7 @@ const Header = () => {
               X
             </IconButton>
           }
-        /> */}
+        />
       </div>
     </header>
   );

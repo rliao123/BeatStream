@@ -1,12 +1,87 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { TextField, Button, Snackbar, IconButton } from "@mui/material";
+import axios from "axios";
+//import IsSignedIn from "../components/SignedInComponenet";
+import Cookies from "js-cookie";
 import "./SignIn.css";
 
 const SignIn = () => {
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [errorMsg, setErrorMsg] = useState("");
+
   const navigate = useNavigate();
   const onLogoContainerClick = () => {
     navigate("/");
   };
+  const onSignUpClick = () => {
+    navigate("/sign-up");
+  };
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/sign-in",
+        formData
+      );
+      console.log("Login Successful:", response.data.message);
+      // Set the JWT token in the browser's cookies
+      document.cookie = Cookies.set("jwt", response.data.jwt);
+
+      localStorage.setItem("email", response.data.email);
+
+      localStorage.setItem("isLoggedIn", true);
+
+      setOpenSnackbar(true);
+      setIsLoggedIn(true);
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        const { error: errorMessage } = error.response.data;
+        setErrorMsg(errorMessage);
+      } else {
+        setErrorMsg("We encountered an unexpected error.");
+      }
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/logout");
+      console.log("Logout Successful:", response.data);
+      setOpenSnackbar(true);
+      setIsLoggedIn(false);
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } catch (error) {
+      console.error("Logout Failed:", error);
+    }
+  };
+
   return (
     <div className="signin-page">
       <img
@@ -19,24 +94,56 @@ const SignIn = () => {
         <h2>Sign In</h2>
         <form>
           <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" required />
+            <TextField
+              className="form-group custom-textfield"
+              placeholder="Email"
+              name="email"
+              value={formData.email}
+              error={errorMsg != "" ? errorMsg : ""}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="password" required />
+            <TextField
+              className="form-group custom-textfield"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              error={errorMsg != "" ? errorMsg : ""}
+              helperText={errorMsg}
+              type="password"
+              required
+              placeholder="Password"
+            />
           </div>
-          <button type="submit" className="signin-button">
+          <button type="submit" className="signin-button" onClick={handleLogin}>
             Sign In
           </button>
         </form>
       </div>
       <p>
         Don't have an account?{" "}
-        <Link to="/sign-up" className="signup-link">
+        <span className="signup-link" onClick={onSignUpClick}>
           Sign Up
-        </Link>
+        </span>
       </p>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        message={isLoggedIn ? "Login Successful." : "Logout Successful"}
+        action={
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleCloseSnackbar}
+          >
+            X
+          </IconButton>
+        }
+      />
     </div>
   );
 };
