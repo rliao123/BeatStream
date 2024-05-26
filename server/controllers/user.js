@@ -29,10 +29,13 @@ const homepage = async (req, res) => {
 
 const login = async (req, res) => {
   // find the user based on email
+  console.log("Received req:", req.body);
   const { email, password } = req.body;
+  console.log("Received email:", email);
+  console.log("Received password:", password);
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: req.body.email });
 
     // if no user found
     if (!user) {
@@ -67,10 +70,11 @@ const login = async (req, res) => {
 
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
     // return the response with user
-    const { username } = user;
+    const { email } = user;
+    console.log("EMAIL: ", user);
     return res.json({
       message: "Login Successful",
-      username,
+      email,
       jwt: token,
     });
   } catch (err) {
@@ -116,21 +120,21 @@ const validate = async (req, res) => {
 };
 
 const getUserDetails = async (req, res) => {
-  const { username } = req.params;
+  const { userEmail } = req.params;
+  console.log(userEmail);
 
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email: userEmail });
     console.log(user);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const { firstname, lastname, phone, email } = user;
+    const { firstname, lastname, email } = user;
 
     res.json({
       firstname,
       lastname,
-      phone,
       email,
     });
   } catch (error) {

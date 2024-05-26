@@ -12,6 +12,7 @@ import { login } from "../controllers/user.js";
 import { logout } from "../controllers/user.js";
 import { validate } from "../controllers/user.js";
 import { getUserDetails } from "../controllers/user.js";
+import { userRegisterValidator } from "../middlewares/user.js";
 
 // import middlewares
 //import { userRegisterValidator } from "../middlewares/user.js";
@@ -63,10 +64,10 @@ router.post("/googleSuccessfulSignIn", (req, res) => {
 
     console.log("User saved successfully: ", token);
     // return the response with user
-    const { username } = user;
+    const { email } = user;
     return res.json({
-      message: "Login Successful",
-      username,
+      message: "Sign In Successful",
+      email,
       jwt: token,
     });
   } else {
@@ -75,10 +76,10 @@ router.post("/googleSuccessfulSignIn", (req, res) => {
   }
 });
 
-router.post("/register", userRegisterValidator, register);
-router.post("/login", login);
-router.get("/logout", logout);
+router.post("/sign-up", userRegisterValidator, register);
+router.post("/sign-in", login);
+router.get("/sign-out", logout);
 router.post("/validate", validate);
-router.get("/:username", getUserDetails);
+router.get("/:userEmail", getUserDetails);
 
 export default router;

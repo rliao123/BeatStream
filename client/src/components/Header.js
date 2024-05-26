@@ -16,22 +16,22 @@ const Header = () => {
   const navigate = useNavigate();
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-  console.log("hi: ", isLoggedIn);
+  const isSignedIn = localStorage.getItem("isSignedIn");
+  console.log("hi: ", isSignedIn);
   //const isLoggedIn = true;
   // const isMerchant = localStorage.getItem("isOwner");
 
   const onSignInClick = () => {
-    navigate("/login");
+    navigate("/sign-in");
   };
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
 
-  const onLogoutClick = async () => {
+  const onSignOutClick = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/logout");
+      const response = await axios.get("http://localhost:8080/sign-out");
       console.log("Login Successful:", response.data);
       setOpenSnackbar(true);
 
@@ -42,14 +42,14 @@ const Header = () => {
       //   localStorage.removeItem("email");
       // }
       localStorage.removeItem("email");
-      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("isSignedIn");
 
       Cookies.remove("jwt"); // Remove jwt cookie
       setTimeout(() => {
-        navigate("/login");
+        navigate("/sign-in");
       }, 2000);
     } catch (error) {
-      console.error("Logout Failed:", error);
+      console.error("Sign Out Failed:", error);
     }
   };
 
@@ -104,7 +104,7 @@ const Header = () => {
           />
 
           <div className="header-container">
-            {isLoggedIn && ( // Conditional rendering based on isLoggedIn state
+            {isSignedIn && ( // Conditional rendering based on isLoggedIn state
               <Button
                 onClick={() => {
                   navigate("/user-dashboard");
@@ -121,7 +121,7 @@ const Header = () => {
                 />
               </Button>
             )}
-            {isLoggedIn && ( // Conditional rendering based on isLoggedIn state
+            {isSignedIn && ( // Conditional rendering based on isLoggedIn state
               <Button
                 onClick={() => {
                   navigate("/user-profile");
@@ -139,9 +139,9 @@ const Header = () => {
                 />
               </Button>
             )}
-            {isLoggedIn ? ( // Conditional rendering based on isLoggedIn state
+            {isSignedIn ? ( // Conditional rendering based on isLoggedIn state
               <Button
-                className="sign-in4"
+                className="sign-out-button"
                 disableElevation={true}
                 variant="contained"
                 sx={{
@@ -151,16 +151,16 @@ const Header = () => {
                   background: "#3BA1B5",
                   borderRadius: "20px",
                   "&:hover": { background: "#3BA1B5" },
-                  width: 80,
+                  width: 88,
                   height: 42,
                 }}
-                onClick={onLogoutClick} // Call onLogoutClick function for logout
+                onClick={onSignOutClick} // Call onLogoutClick function for logout
               >
-                Logout
+                Sign Out
               </Button>
             ) : (
               <Button
-                className="sign-in4"
+                className="homepage-sign-in-button"
                 disableElevation={true}
                 variant="contained"
                 sx={{
@@ -173,7 +173,7 @@ const Header = () => {
                   width: 80,
                   height: 42,
                 }}
-                // onClick={onSignInClick}
+                onClick={onSignInClick}
               >
                 Sign In
               </Button>
@@ -185,7 +185,7 @@ const Header = () => {
           open={openSnackbar}
           autoHideDuration={6000}
           onClose={handleCloseSnackbar}
-          message={isLoggedIn ? "Login Successful." : "Logout Successful"}
+          message={isSignedIn ? "Sign in successful." : "Sign out successful"}
           action={
             <IconButton
               size="small"

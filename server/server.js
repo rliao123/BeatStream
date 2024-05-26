@@ -1,8 +1,17 @@
 import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import morgan from "morgan";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import { body, validationResult } from "express-validator";
+import { json, urlencoded } from "express";
+import session from "express-session";
+import passport from "passport";
+import GoogleStrategy from "passport-google-oauth20";
+import cors from "cors";
 
 dotenv.config();
 
@@ -19,5 +28,12 @@ mongoose
   })
   .then(() => console.log("DB connected"))
   .catch((err) => console.log(err));
+
+import userRoutes from "./routes/user.js";
+app.use("/", userRoutes);
+
+app.listen(process.env.PORT || 8080, function () {
+  console.log("Server is running on port 8080");
+});
 
 export default app;

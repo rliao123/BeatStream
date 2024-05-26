@@ -8,7 +8,7 @@ import "./SignIn.css";
 
 const SignIn = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -41,20 +41,22 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
+      console.log(formData);
       const response = await axios.post(
         "http://localhost:8080/sign-in",
         formData
       );
-      console.log("Login Successful:", response.data.message);
+      console.log("response: ", response.data);
+      console.log("Sign In Successful:", response.data.message);
       // Set the JWT token in the browser's cookies
       document.cookie = Cookies.set("jwt", response.data.jwt);
 
       localStorage.setItem("email", response.data.email);
-
-      localStorage.setItem("isLoggedIn", true);
+      console.log("s email: ", response.data.email);
+      localStorage.setItem("isSignedIn", true);
 
       setOpenSnackbar(true);
-      setIsLoggedIn(true);
+      setIsSignedIn(true);
       setTimeout(() => {
         navigate("/");
       }, 2000);
@@ -73,7 +75,7 @@ const SignIn = () => {
       const response = await axios.get("http://localhost:8080/logout");
       console.log("Logout Successful:", response.data);
       setOpenSnackbar(true);
-      setIsLoggedIn(false);
+      setIsSignedIn(false);
       setTimeout(() => {
         navigate("/");
       }, 2000);
@@ -95,7 +97,7 @@ const SignIn = () => {
         <form>
           <div className="form-group">
             <TextField
-              className="form-group custom-textfield"
+              className="form-group"
               placeholder="Email"
               name="email"
               value={formData.email}
@@ -106,7 +108,7 @@ const SignIn = () => {
           </div>
           <div className="form-group">
             <TextField
-              className="form-group custom-textfield"
+              className="form-group"
               name="password"
               value={formData.password}
               onChange={handleChange}
@@ -132,7 +134,7 @@ const SignIn = () => {
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={handleCloseSnackbar}
-        message={isLoggedIn ? "Login Successful." : "Logout Successful"}
+        message={isSignedIn ? "Sign in successful." : "Logout successful"}
         action={
           <IconButton
             size="small"

@@ -2,8 +2,6 @@ import mongoose from "mongoose";
 import crypto from "crypto";
 import { v1 as uuidv1 } from "uuid";
 
-const mongoose = require("mongoose");
-
 const userSchema = new mongoose.Schema({
   firstname: {
     type: String,
@@ -71,4 +69,4 @@ userSchema.methods = {
 };
 
 const User = mongoose.model("User", userSchema);
-module.exports = User;
+export { User };

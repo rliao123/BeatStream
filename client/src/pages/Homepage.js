@@ -6,9 +6,9 @@ import "./Homepage.css";
 const Homepage = () => {
   return (
     <div className="homepage">
-      <Header />
-      <HomepageComponent1 />
-      <HomepageComponent2 />
+      <Header className="header-home" />
+      <HomepageComponent1 className="home1" />
+      <HomepageComponent2 className="home2" />
     </div>
   );
 };

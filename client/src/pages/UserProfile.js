@@ -1,7 +1,41 @@
 import Header from "../components/Header";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./UserProfile.css";
 
 const UserProfile = () => {
+  const [userDetails, setUserDetails] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const userEmail = localStorage.getItem("email");
+        console.log("email: ", userEmail);
+        const response = await axios.get(`http://localhost:8080/${userEmail}`);
+        console.log(response.data);
+        const { firstname, lastname, email } = response.data;
+
+        setUserDetails({
+          firstName: firstname,
+          lastName: lastname,
+          userEmail: email,
+        });
+
+        console.log(userDetails);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
+
+  console.log(userDetails);
+
   return (
     <div className="user-profile">
       <Header />
@@ -10,8 +44,9 @@ const UserProfile = () => {
           <h3 className="user-profile1">User Profile</h3>
         </header>
         <div className="user-profile-container">
-          <h2>Name: Leo Leo</h2>
-          <h2>Email: leo@gmail.com</h2>
+          <h2>First Name: {userDetails.firstName}</h2>
+          <h2>Last Name: {userDetails.lastName}</h2>
+          <h2>Email: {userDetails.userEmail}</h2>
         </div>
       </div>
     </div>
