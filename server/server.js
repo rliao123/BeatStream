@@ -12,12 +12,14 @@ import session from "express-session";
 import passport from "passport";
 import GoogleStrategy from "passport-google-oauth20";
 import cors from "cors";
+import multer from "multer";
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
+const upload = multer();
 
 app.use(express.json());
 //--------------------DB----------------------//
@@ -31,6 +33,9 @@ mongoose
 
 import userRoutes from "./routes/user.js";
 app.use("/", userRoutes);
+
+import songRoutes from "./routes/song.js";
+app.use("/song", songRoutes);
 
 app.listen(process.env.PORT || 8080, function () {
   console.log("Server is running on port 8080");

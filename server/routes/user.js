@@ -6,12 +6,15 @@ import { User } from "../models/user.js";
 const router = express.Router();
 
 // import controller
-import { register } from "../controllers/user.js";
-import { homepage } from "../controllers/user.js";
-import { login } from "../controllers/user.js";
-import { logout } from "../controllers/user.js";
-import { validate } from "../controllers/user.js";
-import { getUserDetails } from "../controllers/user.js";
+import {
+  register,
+  homepage,
+  login,
+  logout,
+  validate,
+  getUserDetails,
+} from "../controllers/user.js";
+
 import { userRegisterValidator } from "../middlewares/user.js";
 
 // import middlewares

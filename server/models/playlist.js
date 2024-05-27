@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const playlistSchema = new mongoose.Schema({
   userId: mongoose.Schema.Types.ObjectId,

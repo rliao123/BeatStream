@@ -17,9 +17,6 @@ const Header = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const isSignedIn = localStorage.getItem("isSignedIn");
-  console.log("hi: ", isSignedIn);
-  //const isLoggedIn = true;
-  // const isMerchant = localStorage.getItem("isOwner");
 
   const onSignInClick = () => {
     navigate("/sign-in");
