@@ -144,10 +144,53 @@ const deleteFromPlaylist = async (req, res) => {
   }
 };
 
+const updatePlaylist = async (req, res) => {
+  const { playlistId } = req.params;
+  const { playlistName, playlistImage } = req.body;
+
+  try {
+    const playlist = await Playlist.findById(playlistId);
+
+    if (!playlist) {
+      return res.status(404).json({ message: "Playlist not found" });
+    }
+
+    playlist.playlistName = playlistName;
+    playlist.imageURL = playlistImage;
+
+    await playlist.save();
+
+    res
+      .status(200)
+      .json({ message: "Playlist updated successfully", playlist });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const deletePlaylist = async (req, res) => {
+  const { playlistId } = req.params;
+
+  try {
+    // Find playlist by ID and delete it
+    const deletedPlaylist = await Playlist.findByIdAndDelete(playlistId);
+
+    if (!deletedPlaylist) {
+      return res.status(404).json({ message: "Playlist not found" });
+    }
+
+    res.status(200).json({ message: "Playlist deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export {
   createPlaylist,
   getAllPlaylists,
   getPlaylistDetails,
   addToPlaylist,
   deleteFromPlaylist,
+  updatePlaylist,
+  deletePlaylist,
 };

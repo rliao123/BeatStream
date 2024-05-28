@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
 import "./AddSong.css";
+import axios from "axios";
 // import "./CreatePlaylist.css";
 
 const EditPlaylist = () => {
@@ -11,16 +12,52 @@ const EditPlaylist = () => {
 
   const [playlistName, setPlaylistName] = useState("");
   const [playlistImage, setPlaylistImage] = useState("");
+  const playlistId = localStorage.getItem("playlistId");
 
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  useEffect(() => {
+    const fetchPlaylistDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/playlist/get-details/${playlistId}`
+        );
+        const { playlistName, imageURL } = response.data;
+        setPlaylistName(playlistName);
+        setPlaylistImage(imageURL);
+      } catch (error) {
+        console.error("Error fetching playlist details:", error);
+      }
+    };
 
-    // handle form submission logic here
+    fetchPlaylistDetails();
+  }, [playlistId]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/playlist/update/${playlistId}`,
+        { playlistName, playlistImage }
+      );
+
+      navigate(`/playlist-details/${playlistId}`);
+    } catch (error) {
+      console.error("Error updating playlist:", error);
+    }
   };
-  const handleDelete = () => {
-    // handle delete logic here
+  const handleDelete = async () => {
+    try {
+      // Make DELETE request to delete the playlist
+      await axios.delete(
+        `http://localhost:8080/playlist/deleteAll/${playlistId}`
+      );
+      // Redirect to a different page or display a success message
+      navigate("/playlists");
+      console.log("Playlist deleted successfully");
+    } catch (error) {
+      console.error("Error deleting playlist:", error);
+    }
   };
 
   return (
@@ -32,7 +69,7 @@ const EditPlaylist = () => {
         </header>
       </div>
       <div className="edit-playlist-input-outer">
-        <form className="add-song-fields">
+        <form className="add-song-fields" onSubmit={handleSubmit}>
           <div className="delete-button-container">
             <Button
               className="delete-button-playlist"
