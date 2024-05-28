@@ -4,28 +4,6 @@ import ArtistComponent from "../components/ArtistComponent";
 import "./Song.css";
 
 const Artist = () => {
-  const artists = [
-    {
-      id: 1,
-      name: "Artist 1",
-      numOfSongs: "3",
-    },
-    {
-      id: 2,
-      name: "Artist 2",
-      numOfSongs: "2",
-    },
-    {
-      id: 3,
-      name: "Artist 3",
-      numOfSongs: "10",
-    },
-    {
-      id: 4,
-      name: "Artist 4",
-      numOfSongs: "8",
-    },
-  ];
   return (
     <div className="user-profile">
       <Header />
@@ -40,7 +18,7 @@ const Artist = () => {
       <div className="songs-frame">
         <div className="songs-list">
           <div className="section-header"></div>
-          <ArtistComponent artists={artists} />
+          <ArtistComponent />
         </div>
       </div>
     </div>

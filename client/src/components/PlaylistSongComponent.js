@@ -56,6 +56,7 @@ const PlaylistSongComponent = () => {
       // Extract data from each response
       const songsDetails = songsDetailsResponses.map((res) => res.data);
       setSongs(songsDetails);
+      window.location.reload();
     } catch (error) {
       console.error("Error deleting song:", error);
     }

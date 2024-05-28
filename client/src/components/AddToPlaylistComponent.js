@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+
 import "../pages/Song.css";
 
 const AddToPlaylistComponent = () => {
@@ -7,6 +10,15 @@ const AddToPlaylistComponent = () => {
   const userEmail = localStorage.getItem("email");
   const [selectedSongId, setSelectedSongId] = useState(null);
   const playlistId = localStorage.getItem("playlistId");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleOpenSnackbar = () => {
+    setOpenSnackbar(true);
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -40,6 +52,7 @@ const AddToPlaylistComponent = () => {
       });
 
       console.log("Song added to playlist successfully.");
+      handleOpenSnackbar();
     } catch (error) {
       console.error("Error adding song to playlist:", error);
     }
@@ -76,6 +89,22 @@ const AddToPlaylistComponent = () => {
           ))}
         </tbody>
       </table>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        message={"Added to playlist"}
+        action={
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleCloseSnackbar}
+          >
+            X
+          </IconButton>
+        }
+      />
     </div>
   );
 };

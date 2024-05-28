@@ -58,7 +58,7 @@ const SignIn = () => {
       setOpenSnackbar(true);
       setIsSignedIn(true);
       setTimeout(() => {
-        navigate("/");
+        navigate("/user-dashboard");
       }, 2000);
     } catch (error) {
       if (error.response && error.response.status === 400) {
