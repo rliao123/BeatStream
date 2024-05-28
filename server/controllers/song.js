@@ -10,6 +10,8 @@ const addSong = async (req, res) => {
   try {
     const user = await User.findOne({ email });
 
+    console.log("user: ", user);
+
     // If user doesn't exist, return an error
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -18,7 +20,10 @@ const addSong = async (req, res) => {
     console.log(artistName);
 
     const trimmedArtistName = artistName.trim();
-    let artist = await Artist.findOne({ artistName: trimmedArtistName });
+    let artist = await Artist.findOne({
+      artistName: trimmedArtistName,
+      userId: user._id,
+    });
 
     console.log(artist);
 
@@ -28,6 +33,7 @@ const addSong = async (req, res) => {
         artistName: artistName,
         songIds: [],
         numOfSongs: 0,
+        userId: user._id,
       });
     }
 
@@ -66,6 +72,22 @@ const getSongs = async (req, res) => {
   }
 };
 
+const getSongDetails = async (req, res) => {
+  const { songId } = req.params;
+
+  try {
+    const song = await Song.findById(songId);
+
+    if (!song) {
+      return res.status(404).json({ message: "Song not found" });
+    }
+
+    res.status(200).json(song);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const deleteSong = async (req, res) => {
   const { id } = req.params;
 
@@ -83,4 +105,4 @@ const deleteSong = async (req, res) => {
   }
 };
 
-export { getSongs, addSong, deleteSong };
+export { getSongs, addSong, deleteSong, getSongDetails };

@@ -20,6 +20,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 const upload = multer();
+app.use(upload.any());
 
 app.use(express.json());
 //--------------------DB----------------------//
@@ -36,6 +37,9 @@ app.use("/", userRoutes);
 
 import songRoutes from "./routes/song.js";
 app.use("/song", songRoutes);
+
+import playlistRoutes from "./routes/playlist.js";
+app.use("/playlist", playlistRoutes);
 
 app.listen(process.env.PORT || 8080, function () {
   console.log("Server is running on port 8080");

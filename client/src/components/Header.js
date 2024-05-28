@@ -32,14 +32,9 @@ const Header = () => {
       console.log("Login Successful:", response.data);
       setOpenSnackbar(true);
 
-      // if (isMerchant === 'false') {
-      //   localStorage.removeItem("username");
-      // } else {
-      //   localStorage.removeItem("restaurant_id");
-      //   localStorage.removeItem("email");
-      // }
       localStorage.removeItem("email");
       localStorage.removeItem("isSignedIn");
+      localStorage.removeItem("playlistId");
 
       Cookies.remove("jwt"); // Remove jwt cookie
       setTimeout(() => {
@@ -76,7 +71,7 @@ const Header = () => {
           onClick={onLogoContainerClick}
         />
         <div className="header-frame">
-          <TextField
+          {/* <TextField
             className="search-frame-inner"
             placeholder="Enter song, artist, or album you are looking for"
             // onChange={(e) => setSearchInput(e.target.value)} // Add an onChange handler to update searchInput
@@ -98,7 +93,7 @@ const Header = () => {
               },
               "& .MuiInputBase-input": { color: "#808080" },
             }}
-          />
+          /> */}
 
           <div className="header-container">
             {isSignedIn && ( // Conditional rendering based on isLoggedIn state

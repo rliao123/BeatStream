@@ -19,9 +19,10 @@ const AddSong = () => {
   const userEmail = localStorage.getItem("email");
 
   const addSong = async (formData, userEmail) => {
+    console.log("user email: ", userEmail);
     try {
       const response = await axios.post(
-        `http://localhost:8080/add-song/${userEmail}`,
+        `http://localhost:8080/song/add-song/${userEmail}`,
         formData,
         {
           headers: {

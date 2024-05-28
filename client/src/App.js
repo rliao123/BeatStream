@@ -5,6 +5,8 @@ import {
   useNavigationType,
   useLocation,
 } from "react-router-dom";
+
+import { ToastContainer } from "react-toastify";
 import Homepage from "./pages/Homepage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -67,7 +69,10 @@ function App() {
       <Route path="/add-song" element={<AddSong />} />
       <Route path="/create-playlist" element={<CreatePlaylist />} />
       <Route path="/edit-playlist" element={<EditPlaylist />} />
-      <Route path="/playlist-details" element={<ViewPlaylistDetails />} />
+      <Route
+        path="/playlist-details/:playlistId"
+        element={<ViewPlaylistDetails />}
+      />
       <Route path="/add-to-playlist" element={<AddToPlaylist />} />
       <Route path="/artists" element={<Artist />} />
       <Route path="/playlists" element={<Playlist />} />

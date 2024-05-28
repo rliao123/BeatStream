@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
 import "./AddSong.css";
+import axios from "axios";
 // import "./CreatePlaylist.css";
 
 const CreatePlaylist = () => {
@@ -11,13 +12,35 @@ const CreatePlaylist = () => {
 
   const [playlistName, setPlaylistName] = useState("");
   const [playlistImage, setPlaylistImage] = useState("");
+  const userEmail = localStorage.getItem("email");
 
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      const formData = new FormData();
 
-    // handle form submission logic here
+      formData.append("playlistName", playlistName);
+      formData.append("imageURL", playlistImage);
+
+      // Send a POST request to create a new playlist
+      const response = await axios.post(
+        `http://localhost:8080/playlist/create/${userEmail}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      // Redirect to the playlist page after successfully creating the playlist
+      navigate("/playlists");
+    } catch (error) {
+      console.error("Error creating playlist:", error);
+      // Handle error if playlist creation fails
+    }
   };
 
   return (
@@ -29,7 +52,7 @@ const CreatePlaylist = () => {
         </header>
       </div>
       <div className="add-song-input-outer">
-        <form className="add-song-fields">
+        <form className="add-song-fields" onSubmit={handleSubmit}>
           <div className="add-song-input">
             <div className="add-song-frame-container">
               <TextField

@@ -74,6 +74,8 @@ const SignIn = () => {
     try {
       const response = await axios.get("http://localhost:8080/logout");
       console.log("Logout Successful:", response.data);
+      localStorage.setItem("email", "");
+      localStorage.setItem("playlistId", "");
       setOpenSnackbar(true);
       setIsSignedIn(false);
       setTimeout(() => {

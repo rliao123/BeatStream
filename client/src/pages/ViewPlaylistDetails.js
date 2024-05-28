@@ -1,46 +1,40 @@
 import Header from "../components/Header";
-import { Link } from "react-router-dom";
-import SongComponent from "../components/SongComponent";
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import PlaylistSongComponent from "../components/PlaylistSongComponent";
+import axios from "axios";
 import "./Song.css";
 
 const ViewPlaylistDetails = () => {
-  const songs = [
-    {
-      id: 1,
-      title: "Song OneSong",
-      length: "3:45",
-      artist: "Artist A",
-      album: "Album X",
-    },
-    {
-      id: 2,
-      title: "Song Two",
-      length: "4:05",
-      artist: "Artist B",
-      album: "Album Y",
-    },
-    {
-      id: 3,
-      title: "Song Three",
-      length: "2:50",
-      artist: "Artist C",
-      album: "Album Z",
-    },
-    {
-      id: 4,
-      title: "Song Four",
-      length: "5:15",
-      artist: "Artist D",
-      album: "Album W",
-    },
-  ];
+  const [playlist, setPlaylist] = useState(null);
+  const { playlistId } = useParams();
+  // localStorage.setItem("playlistId", playlistId);
+
+  useEffect(() => {
+    const fetchPlaylistDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/playlist/get-details/${playlistId}`
+        );
+        setPlaylist(response.data);
+        console.log("response: ", response.data);
+      } catch (error) {
+        console.error("Error fetching playlist details:", error);
+      }
+    };
+
+    fetchPlaylistDetails();
+  }, [playlistId]);
+
   return (
     <div className="user-profile">
       <Header />
       <div className="user-profile-parent">
         <header className="header-container2">
           <div className="title-with-icon">
-            <h3 className="user-profile1">Playlist #1</h3>
+            <h3 className="user-profile1">
+              {playlist ? playlist.playlistName : "Loading..."}
+            </h3>
           </div>
           <div className="button-container">
             <Link to="/add-to-playlist" className="add-song-link">
@@ -58,7 +52,7 @@ const ViewPlaylistDetails = () => {
       <div className="songs-frame">
         <div className="songs-list">
           <div className="section-header"></div>
-          <SongComponent songs={songs} />
+          {playlist && playlist.songs.length > 0 && <PlaylistSongComponent />}
         </div>
       </div>
     </div>
