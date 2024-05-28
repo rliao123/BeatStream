@@ -8,6 +8,11 @@ const addSong = async (req, res) => {
   const { title, artistName, album, lengthInSec } = req.body;
 
   try {
+    const file = req.file; // Assuming you are using multer middleware
+    const filePath = `uploads/${file.filename}`;
+
+    console.log(filePath);
+
     const user = await User.findOne({ email });
 
     console.log("user: ", user);
@@ -45,6 +50,7 @@ const addSong = async (req, res) => {
       artistName: artistName,
       lengthInSec: parseInt(lengthInSec, 10),
       album: album || "",
+      filePath: filePath,
     });
     const newSong = await song.save();
 

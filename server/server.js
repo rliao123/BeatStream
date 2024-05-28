@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import multerMiddleware from "./middlewares/multerConfig.js";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import morgan from "morgan";
@@ -19,8 +20,8 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
-const upload = multer();
-app.use(upload.any());
+app.use(multerMiddleware);
+// app.use(upload.any());
 
 app.use(express.json());
 //--------------------DB----------------------//
