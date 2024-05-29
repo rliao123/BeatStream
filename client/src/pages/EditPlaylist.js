@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
 import "./AddSong.css";
 import axios from "axios";
-// import "./CreatePlaylist.css";
 
 const EditPlaylist = () => {
-  //   const user = localStorage.getItem("username");
-  //   const restaurantId = localStorage.getItem("restaurant_id");
-
   const [playlistName, setPlaylistName] = useState("");
   const [playlistImage, setPlaylistImage] = useState("");
   const playlistId = localStorage.getItem("playlistId");
@@ -36,10 +32,10 @@ const EditPlaylist = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.put(
-        `http://localhost:8080/playlist/update/${playlistId}`,
-        { playlistName, playlistImage }
-      );
+      await axios.put(`http://localhost:8080/playlist/update/${playlistId}`, {
+        playlistName,
+        playlistImage,
+      });
 
       navigate(`/playlist-details/${playlistId}`);
     } catch (error) {
@@ -48,13 +44,10 @@ const EditPlaylist = () => {
   };
   const handleDelete = async () => {
     try {
-      // Make DELETE request to delete the playlist
       await axios.delete(
         `http://localhost:8080/playlist/deleteAll/${playlistId}`
       );
-      // Redirect to a different page or display a success message
       navigate("/playlists");
-      console.log("Playlist deleted successfully");
     } catch (error) {
       console.error("Error deleting playlist:", error);
     }

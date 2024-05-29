@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import PlaylistSongComponent from "../components/PlaylistSongComponent";
 import axios from "axios";
 import "./Song.css";
@@ -8,7 +8,7 @@ import "./Song.css";
 const ViewPlaylistDetails = () => {
   const [playlist, setPlaylist] = useState(null);
   const { playlistId } = useParams();
-  // localStorage.setItem("playlistId", playlistId);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPlaylistDetails = async () => {
@@ -17,7 +17,6 @@ const ViewPlaylistDetails = () => {
           `http://localhost:8080/playlist/get-details/${playlistId}`
         );
         setPlaylist(response.data);
-        console.log("response: ", response.data);
       } catch (error) {
         console.error("Error fetching playlist details:", error);
       }
@@ -25,6 +24,16 @@ const ViewPlaylistDetails = () => {
 
     fetchPlaylistDetails();
   }, [playlistId]);
+
+  const handlePlayPlaylist = () => {
+    if (playlist && playlist.songs && playlist.songs.length > 0) {
+      navigate(`/play-playlist/${playlistId}`, {
+        state: { songIds: playlist.songs },
+      });
+    } else {
+      console.error("Playlist or playlist songs are undefined.");
+    }
+  };
 
   return (
     <div className="user-profile">
@@ -43,9 +52,11 @@ const ViewPlaylistDetails = () => {
             <Link to="/edit-playlist" className="add-song-link">
               <button className="add-song-button">Edit Playlist</button>
             </Link>
-            <button className="play-button">
-              Play <img alt="" src="/play.png" className="icon-play" />
-            </button>
+            {playlist && playlist.songs.length > 0 && (
+              <button className="play-button" onClick={handlePlayPlaylist}>
+                Play <img alt="" src="/play.png" className="icon-play" />
+              </button>
+            )}
           </div>
         </header>
       </div>

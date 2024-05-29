@@ -49,8 +49,8 @@ const HomepageComponent2 = () => {
             Explore and manage your personal music collection effortlessly
             within your BeatStream library. Our user- friendly interface lets
             you quickly find and play your favorite songs, albums, and artists.
-            Stay in control of your music with easy browsing and convenient
-            access to all your uploaded tracks.
+            Stay in control of your music with convenient access to all your
+            uploaded tracks.
           </p>
         </div>
       </div>

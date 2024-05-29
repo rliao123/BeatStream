@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
 import "./AddSong.css";
 import axios from "axios";
-// import "./CreatePlaylist.css";
 
 const CreatePlaylist = () => {
-  //   const user = localStorage.getItem("username");
-  //   const restaurantId = localStorage.getItem("restaurant_id");
-
   const [playlistName, setPlaylistName] = useState("");
   const [playlistImage, setPlaylistImage] = useState("");
   const userEmail = localStorage.getItem("email");
@@ -24,8 +20,7 @@ const CreatePlaylist = () => {
       formData.append("playlistName", playlistName);
       formData.append("imageURL", playlistImage);
 
-      // Send a POST request to create a new playlist
-      const response = await axios.post(
+      await axios.post(
         `http://localhost:8080/playlist/create/${userEmail}`,
         formData,
         {
@@ -35,11 +30,9 @@ const CreatePlaylist = () => {
         }
       );
 
-      // Redirect to the playlist page after successfully creating the playlist
       navigate("/playlists");
     } catch (error) {
       console.error("Error creating playlist:", error);
-      // Handle error if playlist creation fails
     }
   };
 

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
 import "./AddSong.css";
 
 const AddSong = () => {
-  //   const user = localStorage.getItem("username");
-  //   const restaurantId = localStorage.getItem("restaurant_id");
-
   const [songName, setSongName] = useState("");
   const [artistName, setArtistName] = useState("");
   const [albumName, setAlbumName] = useState("");
@@ -17,9 +16,17 @@ const AddSong = () => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
   const userEmail = localStorage.getItem("email");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleOpenSnackbar = () => {
+    setOpenSnackbar(true);
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
 
   const addSong = async (formData, userEmail) => {
-    console.log("user email: ", userEmail);
     try {
       const response = await axios.post(
         `http://localhost:8080/song/add-song/${userEmail}`,
@@ -30,7 +37,8 @@ const AddSong = () => {
           },
         }
       );
-      console.log(response.data);
+
+      handleOpenSnackbar();
       return response.data;
     } catch (error) {
       console.error(error);
@@ -42,6 +50,10 @@ const AddSong = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!file) {
+      setFileError("Please upload a file.");
+      return;
+    }
     const formData = new FormData();
 
     formData.append("songFile", e.target.songFile.files[0]);
@@ -61,9 +73,8 @@ const AddSong = () => {
   };
 
   const handleFileChange = (e) => {
-    console.log("check: ", e.target.files);
     const selectedFile = e.target.files[0];
-    console.log("selected file: ", selectedFile);
+
     if (selectedFile && selectedFile.type !== "audio/mpeg") {
       setFileError("Only MP3 files are accepted.");
     } else {
@@ -139,24 +150,6 @@ const AddSong = () => {
                 "& .MuiInputBase-input": { color: "#808080" },
               }}
             />
-            <TextField
-              className="song-frame-item"
-              placeholder="Length In Seconds"
-              value={length}
-              onChange={(e) => setLength(e.target.value)}
-              required
-              variant="outlined"
-              sx={{
-                "& fieldset": { borderColor: "#3BA1B5", borderWidth: "2px" },
-                "& .MuiInputBase-root": {
-                  height: "47px",
-                  backgroundColor: "#fff",
-                  borderRadius: "10px",
-                  fontSize: "14px",
-                },
-                "& .MuiInputBase-input": { color: "#808080" },
-              }}
-            />
           </div>
           <div className="upload-button-wrapper">
             <label htmlFor="songFile">
@@ -164,7 +157,7 @@ const AddSong = () => {
                 className="upload-button"
                 disableElevation={true}
                 variant="contained"
-                component="span" // This is important for file input
+                component="span"
                 sx={{
                   textTransform: "none",
                   color: "#fff",
@@ -187,7 +180,6 @@ const AddSong = () => {
               onChange={handleFileChange}
               style={{ display: "none" }}
             />
-            {/* <p>only mp3 files accepted</p> */}
             {fileName && <p className="file-name">{fileName}</p>}
           </div>
           {fileError && <p className="file-error">{fileError}</p>}
@@ -215,6 +207,22 @@ const AddSong = () => {
           </div>
         </form>
       </div>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        message={"Added to collection"}
+        action={
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleCloseSnackbar}
+          >
+            X
+          </IconButton>
+        }
+      />
     </div>
   );
 };

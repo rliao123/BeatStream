@@ -8,13 +8,32 @@ const storage = multer.diskStorage({
     cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-    // Use the original file name for storing the uploaded file
-    const encodedFilename = encodeURIComponent(file.originalname);
-    cb(null, encodedFilename);
+    const originalName = file.originalname.split(".")[0];
+    // Replace invalid characters with underscores and truncate if necessary
+    const sanitizedFilename = originalName
+      .replace(/[^a-zA-Z0-9_.]/g, "_")
+      .substring(0, 255);
+    // Concatenate with the original extension
+    const filenameWithExtension =
+      sanitizedFilename + "." + file.originalname.split(".")[1];
+    cb(null, filenameWithExtension);
   },
 });
 
-const upload = multer({ storage });
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === "audio/mpeg") {
+    cb(null, true);
+  } else {
+    cb(new Error("Invalid file type. Only MP3 files are allowed."), false); // Reject the file
+  }
+};
+
+// File size limitation (10MB)
+const limits = {
+  fileSize: 10 * 1024 * 1024,
+};
+
+const upload = multer({ storage, fileFilter, limits });
 const multerMiddleware = upload.single("songFile");
 
 export default multerMiddleware;

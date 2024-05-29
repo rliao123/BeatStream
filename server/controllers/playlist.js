@@ -72,9 +72,6 @@ const addToPlaylist = async (req, res) => {
   const { playlistId } = req.params;
   const { songId } = req.body;
 
-  console.log(playlistId);
-  console.log(songId);
-
   try {
     const playlist = await Playlist.findById(playlistId);
 

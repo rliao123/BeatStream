@@ -43,6 +43,9 @@ app.use("/playlist", playlistRoutes);
 import artistRoutes from "./routes/artist.js";
 app.use("/artist", artistRoutes);
 
+import albumRoutes from "./routes/album.js";
+app.use("/album", albumRoutes);
+
 app.listen(process.env.PORT || 8080, function () {
   console.log("Server is running on port 8080");
 });
