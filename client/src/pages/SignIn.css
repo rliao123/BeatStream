@@ -1,0 +1,95 @@
+.signin-page {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.signin-page p {
+  color: #082864;
+}
+
+.signin-container {
+  background-color: #daeff3;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  text-align: center;
+}
+
+.logo-image-icon-sign-in {
+  width: 200px;
+  cursor: pointer;
+  padding: 20px;
+}
+
+.signin-container h2 {
+  color: #082864;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+  text-align: left;
+  width: 100%;
+}
+.form-group .MuiOutlinedInput-root {
+  width: 100%;
+  background-color: #f9feff;
+  border-radius: 5px;
+}
+
+.form-group .MuiOutlinedInput-input {
+  padding: 10px;
+  color: #082864;
+}
+
+.form-group .MuiOutlinedInput-notchedOutline {
+  border: 2px solid #3ba1b5;
+}
+
+.form-group .MuiFormLabel-root {
+  color: #082864;
+}
+
+/* .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #3ba1b5;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #f9feff;
+  color: #082864;
+}
+
+.form-group label {
+  display: block;
+  color: #082864;
+  margin-bottom: 5px;
+} */
+
+.signin-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #3ba1b5;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.signin-button:hover {
+  background-color: #2e7d8b;
+}
+
+.signup-link {
+  color: #32aaf0;
+  text-decoration: none;
+  cursor: pointer;
+}

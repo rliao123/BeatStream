@@ -1,0 +1,76 @@
+.add-song-input-outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 622px;
+  padding: 50px;
+  background-color: #daeff3;
+  border-radius: 20px;
+  margin: 40px auto;
+}
+
+.add-song-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.add-song-input {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.add-song-frame-container,
+.song-frame-item {
+  width: 100%;
+}
+
+.add-song-frame {
+  display: flex;
+  justify-content: center;
+  margin-top: -10px;
+}
+
+.add-song-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.upload-button-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 15px;
+}
+.upload-button-wrapper p {
+  margin: 2px;
+  font-size: 12px;
+}
+.file-name {
+  padding-top: 5px;
+}
+
+.add-playlist-frame {
+  display: flex;
+  justify-content: center;
+}
+
+.delete-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit-playlist-input-outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 622px;
+  padding: 30px;
+  background-color: #daeff3;
+  border-radius: 20px;
+  margin: 40px auto;
+}

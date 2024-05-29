@@ -5,7 +5,21 @@ import {
   useNavigationType,
   useLocation,
 } from "react-router-dom";
+
+import { ToastContainer } from "react-toastify";
 import Homepage from "./pages/Homepage";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import UserProfile from "./pages/UserProfile";
+import UserDashboard from "./pages/UserDashboard";
+import Song from "./pages/Song";
+import AddSong from "./pages/AddSong";
+import CreatePlaylist from "./pages/CreatePlaylist";
+import EditPlaylist from "./pages/EditPlaylist";
+import ViewPlaylistDetails from "./pages/ViewPlaylistDetails";
+import AddToPlaylist from "./pages/AddToPlaylist";
+import Artist from "./pages/Artist";
+import Playlist from "./pages/Playlist";
 
 function App() {
   const action = useNavigationType();
@@ -47,6 +61,21 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
+      <Route path="/sign-in" element={<SignIn />} />
+      <Route path="/sign-up" element={<SignUp />} />
+      <Route path="/user-profile" element={<UserProfile />} />
+      <Route path="/user-dashboard" element={<UserDashboard />} />
+      <Route path="/songs" element={<Song />} />
+      <Route path="/add-song" element={<AddSong />} />
+      <Route path="/create-playlist" element={<CreatePlaylist />} />
+      <Route path="/edit-playlist" element={<EditPlaylist />} />
+      <Route
+        path="/playlist-details/:playlistId"
+        element={<ViewPlaylistDetails />}
+      />
+      <Route path="/add-to-playlist" element={<AddToPlaylist />} />
+      <Route path="/artists" element={<Artist />} />
+      <Route path="/playlists" element={<Playlist />} />
     </Routes>
   );
 }

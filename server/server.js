@@ -1,14 +1,50 @@
-import express from "express"
-import cors from "cors"
-import restaurants from "./api/restaurants.route.js"
+import express from "express";
+import bodyParser from "body-parser";
+import multerMiddleware from "./middlewares/multerConfig.js";
+import { fileURLToPath } from "url";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import cors from "cors";
+import path from "path";
 
-const app = express()
+dotenv.config();
 
-app.use(cors())
-app.use(express.json())
+const app = express();
 
-app.use("/api/v1/restaurants", restaurants)
-app.use("*", (req, res) => res.status(404).json({ error: "not found"}))
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-export default app
+// Serve static files from the 'uploads' directory
+app.use("/uploads/", express.static(path.join(__dirname, "uploads")));
+app.use(multerMiddleware);
 
+app.use(express.json());
+//--------------------DB----------------------//
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("DB connected"))
+  .catch((err) => console.log(err));
+
+import userRoutes from "./routes/user.js";
+app.use("/", userRoutes);
+
+import songRoutes from "./routes/song.js";
+app.use("/song", songRoutes);
+
+import playlistRoutes from "./routes/playlist.js";
+app.use("/playlist", playlistRoutes);
+
+import artistRoutes from "./routes/artist.js";
+app.use("/artist", artistRoutes);
+
+app.listen(process.env.PORT || 8080, function () {
+  console.log("Server is running on port 8080");
+});
+
+export default app;
