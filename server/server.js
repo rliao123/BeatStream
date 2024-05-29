@@ -14,12 +14,20 @@ import passport from "passport";
 import GoogleStrategy from "passport-google-oauth20";
 import cors from "cors";
 import multer from "multer";
+import path from "path";
 
 dotenv.config();
 
 const app = express();
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static files from the 'uploads' directory
+app.use("/uploads/", express.static(path.join(__dirname, "uploads")));
 app.use(multerMiddleware);
 // app.use(upload.any());
 

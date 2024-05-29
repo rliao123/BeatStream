@@ -5,7 +5,6 @@ const songSchema = new mongoose.Schema({
   title: String,
   artistName: String,
   artistId: mongoose.Schema.Types.ObjectId,
-  lengthInSec: Number,
   album: { type: String, default: "" },
   filePath: String,
 });

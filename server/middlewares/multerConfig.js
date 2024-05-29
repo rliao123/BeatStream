@@ -9,7 +9,8 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     // Use the original file name for storing the uploaded file
-    cb(null, file.originalname);
+    const encodedFilename = encodeURIComponent(file.originalname);
+    cb(null, encodedFilename);
   },
 });
 

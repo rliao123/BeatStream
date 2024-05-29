@@ -1,15 +1,16 @@
 import { Song } from "../models/song.js";
 import { User } from "../models/user.js";
 import { Artist } from "../models/artist.js";
+import fs from "fs";
 
 const addSong = async (req, res) => {
   const { email } = req.params;
 
-  const { title, artistName, album, lengthInSec } = req.body;
+  const { title, artistName, album } = req.body;
 
   try {
     const file = req.file; // Assuming you are using multer middleware
-    const filePath = `uploads/${file.filename}`;
+    const filePath = `${file.filename}`;
 
     console.log(filePath);
 
@@ -48,11 +49,11 @@ const addSong = async (req, res) => {
       title: title,
       artistId: artist._id,
       artistName: artistName,
-      lengthInSec: parseInt(lengthInSec, 10),
       album: album || "",
       filePath: filePath,
     });
     const newSong = await song.save();
+    console.log(newSong);
 
     artist.songIds.push(newSong._id);
     artist.numOfSongs += 1;
@@ -103,6 +104,23 @@ const deleteSong = async (req, res) => {
     if (!deletedSong) {
       return res.status(404).json({ message: "Song not found" });
     }
+
+    const artist = await Artist.findById(deletedSong.artistId);
+
+    if (!artist) {
+      return res.status(404).json({ message: "Artist not found" });
+    }
+
+    artist.songIds = artist.songIds.filter(
+      (songId) => songId.toString() !== id
+    );
+    artist.numOfSongs -= 1;
+
+    // Save the updated artist to the database
+    await artist.save();
+
+    const filePath = `uploads/${deletedSong.filePath}`;
+    fs.unlinkSync(filePath);
 
     res.status(200).json({ message: "Song deleted successfully" });
   } catch (err) {
