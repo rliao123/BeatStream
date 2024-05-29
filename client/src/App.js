@@ -13,9 +13,11 @@ import ViewPlaylistDetails from "./pages/ViewPlaylistDetails";
 import AddToPlaylist from "./pages/AddToPlaylist";
 import Artist from "./pages/Artist";
 import Playlist from "./pages/Playlist";
+import Album from "./pages/Album";
 import PlaySongs from "./pages/PlaySongs";
 import PlayPlaylist from "./pages/PlayPlaylist";
 import PlayArtist from "./pages/PlayArtists";
+import PlayAlbum from "./pages/PlayAlbum";
 
 function App() {
   const action = useNavigate();
@@ -72,9 +74,11 @@ function App() {
       <Route path="/add-to-playlist" element={<AddToPlaylist />} />
       <Route path="/artists" element={<Artist />} />
       <Route path="/playlists" element={<Playlist />} />
+      <Route path="/albums" element={<Album />} />
       <Route path="/play-songs" element={<PlaySongs />} />
       <Route path="/play-playlist/:playlistId" element={<PlayPlaylist />} />
       <Route path="/play-artist/:artistId" element={<PlayArtist />} />
+      <Route path="/play-album/:albumId" element={<PlayAlbum />} />
     </Routes>
   );
 }

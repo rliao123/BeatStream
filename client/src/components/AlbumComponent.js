@@ -3,33 +3,33 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ArtistComponent.css";
 
-const ArtistComponent = () => {
-  const [artists, setArtists] = useState([]);
+const AlbumComponent = () => {
+  const [albums, setAlbums] = useState([]);
   const userEmail = localStorage.getItem("email");
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchArtists = async () => {
+    const fetchAlbums = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/artist/get/${userEmail}`
+          `http://localhost:8080/album/get/${userEmail}`
         );
-        setArtists(response.data);
+        setAlbums(response.data);
       } catch (error) {
         console.error("Error fetching artists:", error);
       }
     };
 
-    fetchArtists();
+    fetchAlbums();
   }, [userEmail]);
 
-  const handlePlayArtist = (artistId, songIds) => {
+  const handlePlayAlbum = (albumId, songIds) => {
     if (songIds && songIds.length > 0) {
-      navigate(`/play-artist/${artistId}`, {
+      navigate(`/play-album/${albumId}`, {
         state: { songIds },
       });
     } else {
-      console.error("Artist songs are undefined.");
+      console.error("Album songs are undefined.");
     }
   };
 
@@ -38,26 +38,24 @@ const ArtistComponent = () => {
       <table>
         <thead>
           <tr>
-            <th className="artist-name-col">Artist Name</th>
+            <th className="artist-name-col">Album Name</th>
             <th className="artist-num-col">Number of Songs</th>
             <th className="delete-col"></th>
           </tr>
         </thead>
         <tbody>
-          {artists
-            .filter((artist) => artist.numOfSongs > 0)
-            .map((artist) => (
-              <tr key={artist.id}>
-                <td className="artist-name-col">{artist.artistName}</td>
-                <td className="artist-num-col">{artist.numOfSongs}</td>
+          {albums
+            .filter((album) => album.numOfSongs > 0)
+            .map((album) => (
+              <tr key={album.id}>
+                <td className="artist-name-col">{album.albumName}</td>
+                <td className="artist-num-col">{album.numOfSongs}</td>
 
                 <td className="artist-play-col">
-                  {artist.songIds.length > 0 && (
+                  {album.songs.length > 0 && (
                     <button
                       className="artist-play-button"
-                      onClick={() =>
-                        handlePlayArtist(artist.id, artist.songIds)
-                      }
+                      onClick={() => handlePlayAlbum(album._id, album.songs)}
                     >
                       Play{" "}
                       <img
@@ -76,4 +74,4 @@ const ArtistComponent = () => {
   );
 };
 
-export default ArtistComponent;
+export default AlbumComponent;

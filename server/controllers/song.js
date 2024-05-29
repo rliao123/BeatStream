@@ -1,6 +1,7 @@
 import { Song } from "../models/song.js";
 import { User } from "../models/user.js";
 import { Artist } from "../models/artist.js";
+import { Album } from "../models/album.js";
 import { Playlist } from "../models/playlist.js";
 import fs from "fs";
 
@@ -34,6 +35,23 @@ const addSong = async (req, res) => {
       });
     }
 
+    let artistAlbum = await Album.findOne({
+      artistId: artist._id,
+      userId: user._id,
+      albumName: album || "",
+    });
+
+    if (!artistAlbum) {
+      // If album doesn't exist, create a new one
+      artistAlbum = new Album({
+        userId: user._id,
+        albumName: album || "",
+        artistId: artist._id,
+        songs: [],
+        numOfSongs: 0,
+      });
+    }
+
     // Create a new song entry with the artist ID
     const song = new Song({
       userId: user._id,
@@ -44,6 +62,10 @@ const addSong = async (req, res) => {
       filePath: filePath,
     });
     const newSong = await song.save();
+
+    artistAlbum.songs.push(newSong._id);
+    artistAlbum.numOfSongs += 1;
+    await artistAlbum.save();
 
     artist.songIds.push(newSong._id);
     artist.numOfSongs += 1;
@@ -105,8 +127,15 @@ const deleteSong = async (req, res) => {
       (songId) => songId.toString() !== id
     );
     artist.numOfSongs -= 1;
-
     await artist.save();
+
+    const albums = await Album.find({ songs: id });
+
+    for (const album of albums) {
+      album.songs = album.songs.filter((songId) => songId.toString() !== id);
+      album.numOfSongs -= 1;
+      await album.save();
+    }
 
     await Playlist.updateMany({ songs: id }, { $pull: { songs: id } });
 
