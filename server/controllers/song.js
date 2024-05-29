@@ -1,6 +1,7 @@
 import { Song } from "../models/song.js";
 import { User } from "../models/user.js";
 import { Artist } from "../models/artist.js";
+import { Playlist } from "../models/playlist.js";
 import fs from "fs";
 
 const addSong = async (req, res) => {
@@ -106,6 +107,8 @@ const deleteSong = async (req, res) => {
     artist.numOfSongs -= 1;
 
     await artist.save();
+
+    await Playlist.updateMany({ songs: id }, { $pull: { songs: id } });
 
     const filePath = `uploads/${deletedSong.filePath}`;
     fs.unlinkSync(filePath);

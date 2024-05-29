@@ -5,35 +5,37 @@ const userRegisterValidator = [
   body("firstname")
     .notEmpty()
     .withMessage("First Name is required")
-    .isLength({ min: 3, max: 10 })
-    .withMessage("First Name must be between 3 to 10 characters"),
+    .matches(/^[a-zA-Z\s]+$/)
+    .withMessage("First Name can only contain letters (a-z A-Z)"),
 
   // Validate lastName
   body("lastname")
     .notEmpty()
     .withMessage("Last Name is required")
-    .isLength({ min: 3, max: 10 })
-    .withMessage("Last Name must be between 3 to 10 characters"),
+    .matches(/^[a-zA-Z\s]+$/)
+    .withMessage("Last Name can only contain letters (a-z A-Z)"),
 
   // Validate email
   body("email")
     .notEmpty()
     .withMessage("Email is required")
-    .isLength({ min: 3, max: 32 })
-    .withMessage("Email must be between 3 to 32 characters")
-    .isEmail()
-    .withMessage("Email must be valid"),
+    .matches(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
+    .withMessage("Invalid email address"),
 
   // Validate password
   body("password")
     .notEmpty()
     .withMessage("Password is required")
-    .isLength({ min: 6, max: 20 })
-    .withMessage("Password must be between 6 to 20 characters")
-    .matches(/^(?=.*\d)(?=)(?=.*[a-z])(?=.*[A-Z])/)
-    .withMessage(
-      "Password must contain at least one uppercase letter, one lowercase letter, and one number"
-    ),
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters long")
+    .matches(/[a-z]/)
+    .withMessage("Password must contain at least one lowercase letter")
+    .matches(/[A-Z]/)
+    .withMessage("Password must contain at least one uppercase letter")
+    .matches(/[0-9]/)
+    .withMessage("Password must contain at least one digit")
+    .matches(/[^A-Za-z0-9]/)
+    .withMessage("Password must contain at least one special character"),
 
   // Custom middleware to handle validation errors
   (req, res, next) => {
