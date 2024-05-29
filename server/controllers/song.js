@@ -9,29 +9,19 @@ const addSong = async (req, res) => {
   const { title, artistName, album } = req.body;
 
   try {
-    const file = req.file; // Assuming you are using multer middleware
+    const file = req.file; // using multer middleware
     const filePath = `${file.filename}`;
-
-    console.log(filePath);
-
     const user = await User.findOne({ email });
 
-    console.log("user: ", user);
-
-    // If user doesn't exist, return an error
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
-    console.log(artistName);
 
     const trimmedArtistName = artistName.trim();
     let artist = await Artist.findOne({
       artistName: trimmedArtistName,
       userId: user._id,
     });
-
-    console.log(artist);
 
     // If artist doesn't exist, create a new one
     if (!artist) {
@@ -45,7 +35,7 @@ const addSong = async (req, res) => {
 
     // Create a new song entry with the artist ID
     const song = new Song({
-      userId: user._id, // Assuming user_id is the authenticated user's ID
+      userId: user._id,
       title: title,
       artistId: artist._id,
       artistName: artistName,
@@ -53,7 +43,6 @@ const addSong = async (req, res) => {
       filePath: filePath,
     });
     const newSong = await song.save();
-    console.log(newSong);
 
     artist.songIds.push(newSong._id);
     artist.numOfSongs += 1;
@@ -110,13 +99,12 @@ const deleteSong = async (req, res) => {
     if (!artist) {
       return res.status(404).json({ message: "Artist not found" });
     }
-
+    //update artist songIds array
     artist.songIds = artist.songIds.filter(
       (songId) => songId.toString() !== id
     );
     artist.numOfSongs -= 1;
 
-    // Save the updated artist to the database
     await artist.save();
 
     const filePath = `uploads/${deletedSong.filePath}`;
@@ -124,7 +112,6 @@ const deleteSong = async (req, res) => {
 
     res.status(200).json({ message: "Song deleted successfully" });
   } catch (err) {
-    // Handle any errors
     res.status(500).json({ message: err.message });
   }
 };

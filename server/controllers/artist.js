@@ -5,10 +5,8 @@ const getAllArtists = async (req, res) => {
   const { email } = req.params;
 
   try {
-    // Find the user based on the email
     const user = await User.findOne({ email });
 
-    // If user doesn't exist, return an error
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }

@@ -56,12 +56,6 @@ const login = async (req, res) => {
       expiresIn: "24h",
     });
 
-    // // persist the token as 'jwt' in cookie with an expiry date
-    // res.cookie('jwt', token, { expire: new Date() + 9999, httpOnly: true });
-
-    // // Set the token in the response headers
-    // res.set('Set-Cookie', `jwt=${token}; HttpOnly`);
-    // Set the token in the response headers
     res.cookie("jwt", token, {
       expire: new Date() + 9999,
       httpOnly: true,

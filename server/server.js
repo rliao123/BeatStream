@@ -1,19 +1,10 @@
 import express from "express";
 import bodyParser from "body-parser";
 import multerMiddleware from "./middlewares/multerConfig.js";
-import { dirname } from "path";
 import { fileURLToPath } from "url";
-import morgan from "morgan";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import cookieParser from "cookie-parser";
-import { body, validationResult } from "express-validator";
-import { json, urlencoded } from "express";
-import session from "express-session";
-import passport from "passport";
-import GoogleStrategy from "passport-google-oauth20";
 import cors from "cors";
-import multer from "multer";
 import path from "path";
 
 dotenv.config();
@@ -29,7 +20,6 @@ const __dirname = path.dirname(__filename);
 // Serve static files from the 'uploads' directory
 app.use("/uploads/", express.static(path.join(__dirname, "uploads")));
 app.use(multerMiddleware);
-// app.use(upload.any());
 
 app.use(express.json());
 //--------------------DB----------------------//

@@ -17,9 +17,6 @@ import {
 
 import { userRegisterValidator } from "../middlewares/user.js";
 
-// import middlewares
-//import { userRegisterValidator } from "../middlewares/user.js";
-
 // api routes
 router.get("/", homepage);
 

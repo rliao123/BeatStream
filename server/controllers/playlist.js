@@ -10,7 +10,6 @@ const createPlaylist = async (req, res) => {
   try {
     const user = await User.findOne({ email });
 
-    // If user doesn't exist, return an error
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -19,12 +18,11 @@ const createPlaylist = async (req, res) => {
     const playlist = new Playlist({
       userId: user._id,
       playlistName: playlistName,
-      numOfSongs: 0, // Initially, the playlist will have no songs
-      songs: [], // Initially, the playlist will have no songs
+      numOfSongs: 0,
+      songs: [],
       imageURL: imageURL,
     });
 
-    // Save the playlist to the database
     const newPlaylist = await playlist.save();
 
     res
@@ -39,10 +37,8 @@ const getAllPlaylists = async (req, res) => {
   const { email } = req.params;
 
   try {
-    // Find the user based on the email
     const user = await User.findOne({ email });
 
-    // If user doesn't exist, return an error
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -60,7 +56,6 @@ const getPlaylistDetails = async (req, res) => {
   const { playlistId } = req.params;
 
   try {
-    // Find playlist details by ID
     const playlist = await Playlist.findById(playlistId);
 
     if (!playlist) {
@@ -99,7 +94,6 @@ const addToPlaylist = async (req, res) => {
     // Update the number of songs in the playlist
     playlist.numOfSongs = playlist.songs.length;
 
-    // Save the updated playlist
     await playlist.save();
 
     res
@@ -123,7 +117,6 @@ const deleteFromPlaylist = async (req, res) => {
     // Remove the song from the playlist's songs array
     const songIndex = playlist.songs.indexOf(songId);
 
-    // If the song is not found, return an error
     if (songIndex === -1) {
       return res.status(404).json({ message: "Song not found in playlist" });
     }
@@ -133,7 +126,6 @@ const deleteFromPlaylist = async (req, res) => {
     // Update the number of songs in the playlist
     playlist.numOfSongs = playlist.songs.length;
 
-    // Save the updated playlist
     await playlist.save();
 
     res
