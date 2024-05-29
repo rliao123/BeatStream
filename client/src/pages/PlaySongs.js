@@ -23,7 +23,6 @@ const PlaySongs = () => {
         if (response.data.length > 0) {
           setCurrentSong(response.data[0]);
         }
-        console.log("songs: ", response.data);
       } catch (error) {
         console.error("Error fetching songs:", error);
       }
@@ -76,9 +75,7 @@ const PlaySongs = () => {
 
   useEffect(() => {
     if (isPlaying) {
-      audioRef.current.play().catch((error) => {
-        console.log("Autoplay was prevented:", error);
-      });
+      audioRef.current.play().catch((error) => {});
     } else {
       audioRef.current.pause();
     }

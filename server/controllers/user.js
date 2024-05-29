@@ -12,7 +12,7 @@ const register = async (req, res) => {
     });
 
   // create new user if username and email are unique
-  console.log(req.body);
+
   const user = new User(req.body);
   await user.save();
   res.status(201).json({
@@ -28,11 +28,7 @@ const homepage = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  // find the user based on email
-  console.log("Received req:", req.body);
   const { email, password } = req.body;
-  console.log("Received email:", email);
-  console.log("Received password:", password);
 
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -65,7 +61,7 @@ const login = async (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
     // return the response with user
     const { email } = user;
-    console.log("EMAIL: ", user);
+
     return res.json({
       message: "Login Successful",
       email,
@@ -115,11 +111,10 @@ const validate = async (req, res) => {
 
 const getUserDetails = async (req, res) => {
   const { userEmail } = req.params;
-  console.log(userEmail);
 
   try {
     const user = await User.findOne({ email: userEmail });
-    console.log(user);
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }

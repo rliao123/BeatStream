@@ -6,15 +6,12 @@ const PlaylistSongComponent = () => {
   const [songs, setSongs] = useState([]);
   const playlistId = localStorage.getItem("playlistId");
 
-  console.log("id: ", playlistId);
-
   useEffect(() => {
     const fetchPlaylistDetails = async () => {
       try {
         const response = await axios.get(
           `http://localhost:8080/playlist/get-details/${playlistId}`
         );
-        console.log("data: ", response.data);
 
         const songDetailsPromises = response.data.songs.map((songId) =>
           axios.get(`http://localhost:8080/song/get-song-details/${songId}`)
@@ -71,7 +68,6 @@ const PlaylistSongComponent = () => {
           </tr>
         </thead>
         <tbody>
-          {console.log("songs:", songs)}
           {songs &&
             songs.map(
               (song) =>

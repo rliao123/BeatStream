@@ -85,11 +85,7 @@ const SignUp = () => {
       return;
     }
     try {
-      const response = await axios.post(
-        "http://localhost:8080/sign-up",
-        formData
-      );
-      console.log("Sign up Successful:", response.data);
+      await axios.post("http://localhost:8080/sign-up", formData);
       setOpenSnackbar(true);
       setTimeout(() => {
         navigate("/sign-in");

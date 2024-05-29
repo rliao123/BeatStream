@@ -48,7 +48,6 @@ const EditPlaylist = () => {
         `http://localhost:8080/playlist/deleteAll/${playlistId}`
       );
       navigate("/playlists");
-      console.log("Playlist deleted successfully");
     } catch (error) {
       console.error("Error deleting playlist:", error);
     }

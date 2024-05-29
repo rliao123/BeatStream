@@ -14,9 +14,9 @@ const UserProfile = () => {
     const fetchUserDetails = async () => {
       try {
         const userEmail = localStorage.getItem("email");
-        console.log("email: ", userEmail);
+
         const response = await axios.get(`http://localhost:8080/${userEmail}`);
-        console.log(response.data);
+
         const { firstname, lastname, email } = response.data;
 
         setUserDetails({
@@ -24,8 +24,6 @@ const UserProfile = () => {
           lastName: lastname,
           userEmail: email,
         });
-
-        console.log(userDetails);
       } catch (error) {
         console.error(error);
       }
@@ -33,8 +31,6 @@ const UserProfile = () => {
 
     fetchUserDetails();
   }, []);
-
-  console.log(userDetails);
 
   return (
     <div className="user-profile">

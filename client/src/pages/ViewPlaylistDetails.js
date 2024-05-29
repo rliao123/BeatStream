@@ -17,7 +17,6 @@ const ViewPlaylistDetails = () => {
           `http://localhost:8080/playlist/get-details/${playlistId}`
         );
         setPlaylist(response.data);
-        console.log("response: ", response.data);
       } catch (error) {
         console.error("Error fetching playlist details:", error);
       }
@@ -28,8 +27,6 @@ const ViewPlaylistDetails = () => {
 
   const handlePlayPlaylist = () => {
     if (playlist && playlist.songs && playlist.songs.length > 0) {
-      console.log("playlist songs: ", playlist.songs);
-      console.log("playlist: ", playlist);
       navigate(`/play-playlist/${playlistId}`, {
         state: { songIds: playlist.songs },
       });

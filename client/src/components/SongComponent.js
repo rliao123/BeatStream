@@ -13,8 +13,6 @@ const SongComponent = () => {
           `http://localhost:8080/song/get/${userEmail}`
         );
 
-        console.log(response.data);
-
         setSongs(response.data);
       } catch (error) {
         console.error("Error fetching songs:", error);
@@ -26,7 +24,6 @@ const SongComponent = () => {
 
   const handleDelete = async (id) => {
     try {
-      console.log("id: ", id);
       await axios.delete(`http://localhost:8080/song/delete/${id}`);
       window.location.reload();
     } catch (error) {

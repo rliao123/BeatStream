@@ -27,7 +27,6 @@ const AddSong = () => {
   };
 
   const addSong = async (formData, userEmail) => {
-    console.log("user email: ", userEmail);
     try {
       const response = await axios.post(
         `http://localhost:8080/song/add-song/${userEmail}`,
@@ -38,7 +37,7 @@ const AddSong = () => {
           },
         }
       );
-      console.log(response.data);
+
       handleOpenSnackbar();
       return response.data;
     } catch (error) {
@@ -74,9 +73,8 @@ const AddSong = () => {
   };
 
   const handleFileChange = (e) => {
-    console.log("check: ", e.target.files);
     const selectedFile = e.target.files[0];
-    console.log("selected file: ", selectedFile);
+
     if (selectedFile && selectedFile.type !== "audio/mpeg") {
       setFileError("Only MP3 files are accepted.");
     } else {

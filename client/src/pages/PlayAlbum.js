@@ -16,7 +16,6 @@ const PlayAlbum = () => {
   const audioRef = useRef(new Audio());
 
   useEffect(() => {
-    console.log("songIdss: ", location.state.songIds);
     const fetchSongs = async () => {
       try {
         const fetchedSongs = await Promise.all(
@@ -31,7 +30,6 @@ const PlayAlbum = () => {
         if (fetchedSongs.length > 0) {
           setCurrentSong(fetchedSongs[0]);
         }
-        console.log("songs: ", fetchedSongs);
       } catch (error) {
         console.error("Error fetching songs:", error);
       }
@@ -84,9 +82,7 @@ const PlayAlbum = () => {
 
   useEffect(() => {
     if (isPlaying) {
-      audioRef.current.play().catch((error) => {
-        console.log("Autoplay was prevented:", error);
-      });
+      audioRef.current.play().catch((error) => {});
     } else {
       audioRef.current.pause();
     }

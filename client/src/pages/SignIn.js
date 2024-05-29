@@ -40,18 +40,13 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      console.log(formData);
       const response = await axios.post(
         "http://localhost:8080/sign-in",
         formData
       );
-      console.log("response: ", response.data);
-      console.log("Sign In Successful:", response.data.message);
 
       document.cookie = Cookies.set("jwt", response.data.jwt);
-
       localStorage.setItem("email", response.data.email);
-      console.log("s email: ", response.data.email);
       localStorage.setItem("isSignedIn", true);
 
       setOpenSnackbar(true);
