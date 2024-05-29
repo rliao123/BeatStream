@@ -1,13 +1,6 @@
-import {
-  TextField,
-  InputAdornment,
-  Icon,
-  IconButton,
-  Snackbar,
-  Button,
-} from "@mui/material";
-import { useNavigate, Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { IconButton, Snackbar, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import "./Header.css";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -36,7 +29,7 @@ const Header = () => {
       localStorage.removeItem("isSignedIn");
       localStorage.removeItem("playlistId");
 
-      Cookies.remove("jwt"); // Remove jwt cookie
+      Cookies.remove("jwt");
       setTimeout(() => {
         navigate("/sign-in");
       }, 2000);
@@ -49,21 +42,9 @@ const Header = () => {
     navigate("/");
   };
 
-  // const [searchInput, setSearchInput] = useState("");
-  // const handleSearch = async () => {
-  //   navigate(`/searched-results?query=${encodeURIComponent(searchInput)}`);
-  // };
-
-  // const handleKeyPress = (event) => {
-  //   if (event.key === "Enter") {
-  //     handleSearch();
-  //   }
-  // };
-
   return (
     <header className="header-wrapper">
       <div className="header">
-        {/* <img className="logo-icon" loading="lazy" alt="" src="/logo@2x.png" /> */}
         <img
           className="logo-image-icon"
           alt=""
@@ -71,32 +52,8 @@ const Header = () => {
           onClick={onLogoContainerClick}
         />
         <div className="header-frame">
-          {/* <TextField
-            className="search-frame-inner"
-            placeholder="Enter song, artist, or album you are looking for"
-            // onChange={(e) => setSearchInput(e.target.value)} // Add an onChange handler to update searchInput
-            // onKeyUp={handleKeyPress} // Add onKeyPress event handler
-            variant="outlined"
-            InputProps={{
-              endAdornment: (
-                <img width="19px" height="19px" src="/search-icon.png" />
-              ),
-            }}
-            sx={{
-              "& fieldset": { borderColor: "#808080" },
-              "& .MuiInputBase-root": {
-                height: "49px",
-                width: "420px",
-                backgroundColor: "#fff",
-                paddingRight: "25px",
-                borderRadius: "10px",
-              },
-              "& .MuiInputBase-input": { color: "#808080" },
-            }}
-          /> */}
-
           <div className="header-container">
-            {isSignedIn && ( // Conditional rendering based on isLoggedIn state
+            {isSignedIn && (
               <Button
                 onClick={() => {
                   navigate("/user-dashboard");
@@ -113,7 +70,7 @@ const Header = () => {
                 />
               </Button>
             )}
-            {isSignedIn && ( // Conditional rendering based on isLoggedIn state
+            {isSignedIn && (
               <Button
                 onClick={() => {
                   navigate("/user-profile");
@@ -131,7 +88,7 @@ const Header = () => {
                 />
               </Button>
             )}
-            {isSignedIn ? ( // Conditional rendering based on isLoggedIn state
+            {isSignedIn ? (
               <Button
                 className="sign-out-button"
                 disableElevation={true}
@@ -146,7 +103,7 @@ const Header = () => {
                   width: 88,
                   height: 42,
                 }}
-                onClick={onSignOutClick} // Call onLogoutClick function for logout
+                onClick={onSignOutClick}
               >
                 Sign Out
               </Button>

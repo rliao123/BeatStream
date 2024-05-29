@@ -28,7 +28,6 @@ const SongComponent = () => {
     try {
       console.log("id: ", id);
       await axios.delete(`http://localhost:8080/song/delete/${id}`);
-
       window.location.reload();
     } catch (error) {
       console.error("Error deleting song:", error);
@@ -41,7 +40,6 @@ const SongComponent = () => {
         <thead>
           <tr>
             <th className="title-col">Title</th>
-            <th className="length-col">Length</th>
             <th className="artist-col">Artist</th>
             <th className="album-col">Album</th>
             <th className="delete-col"></th>
@@ -51,7 +49,6 @@ const SongComponent = () => {
           {songs.map((song) => (
             <tr key={song.id}>
               <td className="title-col">{song.title}</td>
-              <td className="length-col">{song.lengthInSec}</td>
               <td className="artist-col">{song.artistName}</td>
               <td className="album-col">{song.album}</td>
               <td className="delete-col">

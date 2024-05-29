@@ -1,40 +1,40 @@
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import SongComponent from "../components/SongComponent";
 import "./Song.css";
 
-const Song = ({ userDetails }) => {
-  const songs = [
-    {
-      id: 1,
-      title:
-        "Song OneSong OneSong OneSong OneSong OneSong OneSong OneSong OneSong OneSong OneSong OneSong OneSong OneSong OneSong OneSong OneSong OneSong One",
-      length: "3:45",
-      artist: "Artist A",
-      album: "Album X",
-    },
-    {
-      id: 2,
-      title: "Song Two",
-      length: "4:05",
-      artist: "Artist B",
-      album: "Album Y",
-    },
-    {
-      id: 3,
-      title: "Song Three",
-      length: "2:50",
-      artist: "Artist C",
-      album: "Album Z",
-    },
-    {
-      id: 4,
-      title: "Song Four",
-      length: "5:15",
-      artist: "Artist D",
-      album: "Album W",
-    },
-  ];
+const Song = () => {
+  const [hasSongs, setHasSongs] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchSongs = async () => {
+      try {
+        const userEmail = localStorage.getItem("email");
+        if (userEmail) {
+          const response = await axios.get(
+            `http://localhost:8080/song/get/${userEmail}`
+          );
+
+          setHasSongs(response.data !== null && response.data.length > 0);
+        }
+      } catch (error) {
+        console.error("Error fetching songs:", error);
+      }
+    };
+    fetchSongs();
+  }, []);
+
+  const handlePlaySongs = () => {
+    if (hasSongs) {
+      navigate("/play-songs");
+    } else {
+      console.log("No songs available to play");
+    }
+  };
+
   return (
     <div className="user-profile">
       <Header />
@@ -48,16 +48,18 @@ const Song = ({ userDetails }) => {
             <Link to="/add-song" className="add-song-link">
               <button className="add-song-button">Add Song</button>
             </Link>
-            <button className="play-button">
-              Play <img alt="" src="/play.png" className="icon-play" />
-            </button>
+            {hasSongs && (
+              <button className="play-button" onClick={handlePlaySongs}>
+                Play <img alt="" src="/play.png" className="icon-play" />
+              </button>
+            )}
           </div>
         </header>
       </div>
       <div className="songs-frame">
         <div className="songs-list">
           <div className="section-header"></div>
-          <SongComponent songs={songs} />
+          <SongComponent />
         </div>
       </div>
     </div>

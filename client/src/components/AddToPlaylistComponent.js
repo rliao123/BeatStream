@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
-
 import "../pages/Song.css";
 
 const AddToPlaylistComponent = () => {
   const [songs, setSongs] = useState([]);
   const userEmail = localStorage.getItem("email");
-  const [selectedSongId, setSelectedSongId] = useState(null);
   const playlistId = localStorage.getItem("playlistId");
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
@@ -37,16 +35,6 @@ const AddToPlaylistComponent = () => {
 
   const handleAddToPlaylist = async (playlistId, songId) => {
     try {
-      // // Make sure a song is selected
-      // if (!selectedSongId) {
-      //   console.error("Please select a song.");
-      //   return;
-      // }
-
-      console.log("playlist: ", playlistId);
-      console.log("song: ", songId);
-
-      // Send a request to add the song to the playlist
       await axios.post(`http://localhost:8080/playlist/add/${playlistId}`, {
         songId: songId,
       });
@@ -64,7 +52,6 @@ const AddToPlaylistComponent = () => {
         <thead>
           <tr>
             <th className="title-col">Title</th>
-            <th className="length-col">Length</th>
             <th className="artist-col">Artist</th>
             <th className="album-col">Album</th>
             <th className="delete-col"></th>
@@ -74,7 +61,6 @@ const AddToPlaylistComponent = () => {
           {songs.map((song) => (
             <tr key={song.id}>
               <td className="title-col">{song.title}</td>
-              <td className="length-col">{song.lengthInSec}</td>
               <td className="artist-col">{song.artistName}</td>
               <td className="album-col">{song.album}</td>
               <td className="delete-col">

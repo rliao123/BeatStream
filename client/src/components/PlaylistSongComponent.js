@@ -4,7 +4,6 @@ import "../pages/Song.css";
 
 const PlaylistSongComponent = () => {
   const [songs, setSongs] = useState([]);
-  const userEmail = localStorage.getItem("email");
   const playlistId = localStorage.getItem("playlistId");
 
   console.log("id: ", playlistId);
@@ -17,14 +16,12 @@ const PlaylistSongComponent = () => {
         );
         console.log("data: ", response.data);
 
-        // Fetch details for each song ID in the playlist
         const songDetailsPromises = response.data.songs.map((songId) =>
           axios.get(`http://localhost:8080/song/get-song-details/${songId}`)
         );
 
         const songsDetailsResponses = await Promise.all(songDetailsPromises);
 
-        // Extract data from each response
         const songsDetails = songsDetailsResponses.map((res) => res.data);
         setSongs(songsDetails);
       } catch (error) {
@@ -68,7 +65,6 @@ const PlaylistSongComponent = () => {
         <thead>
           <tr>
             <th className="title-col">Title</th>
-            <th className="length-col">Length</th>
             <th className="artist-col">Artist</th>
             <th className="album-col">Album</th>
             <th className="delete-col"></th>
@@ -79,11 +75,9 @@ const PlaylistSongComponent = () => {
           {songs &&
             songs.map(
               (song) =>
-                // Check if song is not null or undefined
                 song && (
                   <tr key={song._id}>
                     <td className="title-col">{song.title}</td>
-                    <td className="length-col">{song.lengthInSec}</td>
                     <td className="artist-col">{song.artistName}</td>
                     <td className="album-col">{song.album}</td>
                     <td className="delete-col">

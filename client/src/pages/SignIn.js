@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { TextField, Button, Snackbar, IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { TextField, Snackbar, IconButton } from "@mui/material";
 import axios from "axios";
-//import IsSignedIn from "../components/SignedInComponenet";
 import Cookies from "js-cookie";
 import "./SignIn.css";
 
@@ -48,7 +47,7 @@ const SignIn = () => {
       );
       console.log("response: ", response.data);
       console.log("Sign In Successful:", response.data.message);
-      // Set the JWT token in the browser's cookies
+
       document.cookie = Cookies.set("jwt", response.data.jwt);
 
       localStorage.setItem("email", response.data.email);
@@ -67,22 +66,6 @@ const SignIn = () => {
       } else {
         setErrorMsg("We encountered an unexpected error.");
       }
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/logout");
-      console.log("Logout Successful:", response.data);
-      localStorage.setItem("email", "");
-      localStorage.setItem("playlistId", "");
-      setOpenSnackbar(true);
-      setIsSignedIn(false);
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-    } catch (error) {
-      console.error("Logout Failed:", error);
     }
   };
 

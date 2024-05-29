@@ -1,8 +1,7 @@
-import { TextField, Button, Snackbar, IconButton } from "@mui/material";
+import { TextField, Snackbar, IconButton } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
 import "./SignIn.css";
 
 const SignUp = () => {
@@ -15,10 +14,7 @@ const SignUp = () => {
 
   const navigate = useNavigate();
 
-  const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbars
-  const [errorMessage, setErrorMessage] = useState(""); // State to store error message
-  const [isSignedIn, setIsSignedIn] = useState(!!Cookies.get("jwt"));
-  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const validatePassword = (field) => {
@@ -64,27 +60,6 @@ const SignUp = () => {
     setOpenSnackbar(false);
   };
 
-  const handleSignInSuccess = (response) => {
-    axios
-      .post("http://localhost:8080/googleSuccessfullSignIn", response)
-      .then((responseFromBackend) => {
-        console.log("Login Successful:", responseFromBackend);
-        // Set the JWT token in the browser's cookies
-        document.cookie = Cookies.set("jwt", responseFromBackend.data.jwt);
-        setOpenSnackbar(true); // Open Snackbar on successful registration
-        setIsSignedIn(true);
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
-      })
-      .catch((error) => {
-        console.error("Signup Failed:", error);
-        if (error.response) {
-          console.error("Response Data:", error.response.data);
-        }
-      });
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -115,9 +90,9 @@ const SignUp = () => {
         formData
       );
       console.log("Sign up Successful:", response.data);
-      setOpenSnackbar(true); // Open Snackbar on successful registration
+      setOpenSnackbar(true);
       setTimeout(() => {
-        navigate("/sign-in"); // Redirect to login page after a delay
+        navigate("/sign-in");
       }, 2000);
     } catch (error) {
       console.error("Signup Failed:", error);

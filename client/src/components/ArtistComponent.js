@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ArtistComponent.css";
 
 const ArtistComponent = () => {
   const [artists, setArtists] = useState([]);
   const userEmail = localStorage.getItem("email");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchArtists = async () => {
@@ -20,6 +22,17 @@ const ArtistComponent = () => {
 
     fetchArtists();
   }, [userEmail]);
+
+  const handlePlayArtist = (artistId, songIds) => {
+    if (songIds && songIds.length > 0) {
+      navigate(`/play-artist/${artistId}`, {
+        state: { songIds },
+      });
+    } else {
+      console.error("Artist songs are undefined.");
+    }
+  };
+
   return (
     <div className="artists-list">
       <table>
@@ -37,10 +50,15 @@ const ArtistComponent = () => {
               <td className="artist-num-col">{artist.numOfSongs}</td>
 
               <td className="artist-play-col">
-                <button className="artist-play-button">
-                  Play{" "}
-                  <img alt="" src="/play.png" className="icon-play-artists" />
-                </button>
+                {artist.songIds.length > 0 && (
+                  <button
+                    className="artist-play-button"
+                    onClick={() => handlePlayArtist(artist.id, artist.songIds)}
+                  >
+                    Play{" "}
+                    <img alt="" src="/play.png" className="icon-play-artists" />
+                  </button>
+                )}
               </td>
             </tr>
           ))}

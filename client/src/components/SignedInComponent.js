@@ -2,7 +2,6 @@ import handleLogin from "../pages/SignIn";
 import handleLogout from "../pages/SignIn";
 import Button from "@mui/material/Button";
 
-// Login Button Logic for Header
 const IsSignedIn = ({ IsSignedIn }) => {
   return IsSignedIn ? (
     <Button

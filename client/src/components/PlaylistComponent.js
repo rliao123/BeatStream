@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // Import Link from React Router
+import { Link } from "react-router-dom";
 import "./PlaylistComponent.css";
 
 const PlaylistComponent = () => {
@@ -10,7 +10,6 @@ const PlaylistComponent = () => {
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {
-        // Fetch playlists associated with the user's email
         const response = await axios.get(
           `http://localhost:8080/playlist/get/${userEmail}`
         );
@@ -19,8 +18,6 @@ const PlaylistComponent = () => {
         console.error("Error fetching playlists:", error);
       }
     };
-
-    // Fetch playlists when component mounts
     fetchPlaylists();
   }, [userEmail]);
 
