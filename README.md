@@ -1,6 +1,6 @@
-# Music Playlist Application
+# Music Streaming Application
 
-This is a music playlist application that allows users to upload songs, create playlists, and manage their music collection. Users can also play songs from their collection, playlists, and specified albums or artists.
+This is a music streaming application that allows users to upload songs, create playlists, and manage their music collection. Users can also play songs from their collection, playlists, and specified albums or artists.
 
 ## Features
 
