@@ -41,11 +41,13 @@ Install the following:
 3. After cloning, you should see two folders: server and client.
  The server includes server-side functions such as the database connection and routes.
  The client includes the front-end components and pages. In separate terminal tabs, make the two commands to install the dependencies:
- ```cd client
+ ```bash
+cd client
    npm install
 ```
 
-   ```cd server
+   ```
+cd server
        npm install
 ```
 
