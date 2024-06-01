@@ -34,7 +34,9 @@ Install the following:
 ## Getting Started
 1. Open up a terminal and cd into your project destination folder. Clone the repository to your local envrionment:
 
-``` git clone https://github.com/rliao123/BeatStream.git```
+```bash
+git clone https://github.com/rliao123/BeatStream.git
+```
 
 2. Navigate to the project directory
    ```bash
