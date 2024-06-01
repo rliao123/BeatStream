@@ -69,7 +69,7 @@ Install the following:
 7. In separate terminal tabs, run the following to start the front-end and back-end parts of the application:
    Frontend:
    ```bash
-    cd ../client
+    cd client
     npm start
     ```
    Backend:
@@ -82,10 +82,10 @@ Install the following:
 ## Usage
 
 ### Sign Up
-1. Click `Get Started`
+1. Click "Get Started"
 <img width="1440" alt="Screen Shot 2024-05-31 at 8 59 13 PM" src="https://github.com/rliao123/BeatStream/assets/92598518/1a2129f3-48d0-4ae2-a6ef-d5d41f13ef43">
-2. Enter your first name, last name, email, and password
-   - password validation: must have at least 6 characters and include at least one each: a-z, A-Z, 0-9, and special characters
+2. Enter your first name, last name, email, and password.
+   - Password validation: must have at least 6 characters and include at least one each: a-z, A-Z, 0-9, and special characters
 <img width="1440" alt="Screen Shot 2024-05-31 at 8 59 51 PM" src="https://github.com/rliao123/BeatStream/assets/92598518/fe819b59-908f-4abf-a80a-ab935e6db12f">
 3. Upon successfully signing up, sign in with email and password
 <img width="1440" alt="Screen Shot 2024-05-31 at 9 01 17 PM" src="https://github.com/rliao123/BeatStream/assets/92598518/c8350b76-971f-4fff-bf56-afb5798e9330">
@@ -110,7 +110,7 @@ Install the following:
 
 ### Create and Manage Playlist
 
-1. Navigate to the "Playlist" page to view all playlists. Click "Create Playlist".
+1. Navigate to the "Playlists" page to view all playlists. Click "Create Playlist".
    <img width="1440" alt="Screen Shot 2024-05-31 at 9 09 41 PM" src="https://github.com/rliao123/BeatStream/assets/92598518/281bd368-3055-4b70-a5f5-e0b9a1b181a2">
 <img width="1440" alt="Screen Shot 2024-05-31 at 9 10 29 PM" src="https://github.com/rliao123/BeatStream/assets/92598518/3cdfea33-b1de-42ac-84d0-2652a853195b">
 
