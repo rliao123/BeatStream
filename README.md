@@ -37,42 +37,47 @@ Install the following:
 ``` git clone https://github.com/rliao123/BeatStream.git```
 
 2. Navigate to the project directory
-   ```cd beatstream```
-3. After cloning, you should see two folders: server and client.
+   ```bash
+   cd beatstream
+   ```
+4. After cloning, you should see two folders: server and client.
  The server includes server-side functions such as the database connection and routes.
  The client includes the front-end components and pages. In separate terminal tabs, make the two commands to install the dependencies:
- ```bash
-cd client
+    ```bash
+    cd client
+    npm install
+    ```
+
+   ```bash
+   cd server
    npm install
-```
-
    ```
-cd server
-       npm install
-```
 
-4. Create a `.env` file in the `server` directory and add the following variables:
-   ```
-   PORT=8080
-MONGODB_URI=your_mongodb_uri
-JWT_SECRET=your_jwt_secret
-SESSION_SECRET=your_session_secret
-```
-5. Add an "uploads" folder in the `server` directory manually in VSCode or via command:
-```
+5. Create a `.env` file in the `server` directory and add the following variables:
+   ```env
+    PORT=8080
+    MONGODB_URI=your_mongodb_uri
+    JWT_SECRET=your_jwt_secret
+    SESSION_SECRET=your_session_secret
+    ```
+6. Add an "uploads" folder in the `server` directory manually in VSCode or via command:
+   ```bash
     mkdir server/uploads
     ```
-6. Navigate to the MongoDB Atlas website to "Rachel's Org - 2024-05-19" and go to the "Network Access" tab on the left panel.
+7. Navigate to the MongoDB Atlas website to "Rachel's Org - 2024-05-19" and go to the "Network Access" tab on the left panel.
    From here, click "+ Add IP Address" to add your IP address and connect to the database.
-7. In separate terminal tabs, run the following to start the front-end and back-end parts of the application:
+8. In separate terminal tabs, run the following to start the front-end and back-end parts of the application:
    Frontend:
-   `cd client
-   npm start`
+   ```bash
+    cd ../client
+    npm start
+    ```
    Backend:
-   `cd server
-   npm start`
-
-8. Open your browser and navigate to `http://localhost:3000` if it is not automatically done so
+   ```bash
+    cd server
+    npm start
+    ```
+9. Open your browser and navigate to `http://localhost:3000` if it is not automatically done so
 
 ## Usage
 
