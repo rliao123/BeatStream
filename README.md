@@ -11,7 +11,7 @@ This is a music streaming application that allows users to upload songs, create 
 - Play songs from collections
 
 ## Prerequisites
-Before you begin, make sure you have the following installed on your local machine:
+Install the following:
 - React.js
 - Node.js
 - npm (Node Package Manager)
@@ -31,8 +31,8 @@ Before you begin, make sure you have the following installed on your local machi
 - Axios
 - JWT Authentication
 
-## Setup and Installation
-1. Clone the repository to your local envrionment
+## Getting Started
+1. Open up a terminal and cd into your project destination folder. Clone the repository to your local envrionment:
 
 ``` git clone https://github.com/rliao123/BeatStream.git```
 
@@ -41,9 +41,9 @@ Before you begin, make sure you have the following installed on your local machi
 3. After cloning, you should see two folders: server and client.
  The server includes server-side functions such as the database connection and routes.
  The client includes the front-end components and pages. In separate terminal tabs, make the two commands:
- ```cd beatstream/client
+ ```cd client
 npm install```
-   ```cd beatstream/server
+   ```cd server
  npm install``` and to install the dependencies
 
 4. Create a `.env` file in the server directory and add the following variables:
