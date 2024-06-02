@@ -1,0 +1,47 @@
+.songs-list {
+  width: 100%;
+  border-collapse: collapse;
+  padding: 15px 20px;
+}
+.songs-list table {
+  width: 100%;
+  border: 2px solid #3ba1b5;
+}
+
+.songs-list th,
+.songs-list td {
+  padding: 8px;
+}
+
+.songs-list th.artist-name-col,
+.songs-list td.artist-name-col {
+  width: 100px;
+}
+
+.songs-list th.artist-num-col,
+.songs-list td.artist-num-col {
+  width: 100px;
+}
+.songs-list th.artist-play-col,
+.songs-list td.artist-play-col {
+  width: 70px;
+  text-align: center;
+}
+.artist-play-button {
+  background-color: #1c7d90;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.play-button:hover {
+  background-color: #239ab1;
+}
+
+.icon-play-artists {
+  margin-bottom: -5px;
+  width: 20px;
+  height: 20px;
+}

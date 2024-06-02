@@ -1,0 +1,28 @@
+.dashboard-options {
+  display: flex;
+  flex-direction: column;
+}
+.dashboard-option {
+  color: #1c7d90;
+  text-decoration: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding-left: 50px;
+  display: block;
+}
+.icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+.option-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.option-content h3 {
+  padding-bottom: 10px;
+}
+.option-content h3 {
+  margin: 0;
+}
