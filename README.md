@@ -127,9 +127,11 @@ Install the following:
 ### View Albums and Artists
 
 1. Navigate to the "Albums" or "Artists" page.
-   <img width="1440" alt="Screen Shot 2024-05-31 at 9 11 40 PM" src="https://github.com/rliao123/BeatStream/assets/92598518/b2f0a4fa-ac9d-4a35-848b-5d6eb0087cc5">
+<img width="1440" alt="Screen Shot 2024-05-31 at 9 11 40 PM" src="https://github.com/rliao123/BeatStream/assets/92598518/b2f0a4fa-ac9d-4a35-848b-5d6eb0087cc5">
 <img width="1440" alt="Screen Shot 2024-05-31 at 9 12 53 PM" src="https://github.com/rliao123/BeatStream/assets/92598518/6f027100-84f7-4294-bfa8-7c3ce9c75fdd">
 2. Click the "Play" button to start playing songs.
+
+### Disclaimer
 
 **Example Purposes Only:**
 
