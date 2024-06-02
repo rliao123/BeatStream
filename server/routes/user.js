@@ -22,7 +22,6 @@ router.get("/", homepage);
 
 // route for getting credentials from client
 router.post("/googleSuccessfulSignIn", (req, res) => {
-  console.log(req.body);
   // decode id token and get user info
   const idToken = req.body.credential;
   const decoded = jwt.decode(idToken);

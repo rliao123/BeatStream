@@ -4,6 +4,9 @@ import axios from "axios";
 import Header from "../components/Header";
 import "./Play.css";
 
+/**
+ * Play songs from a specific artist
+ */
 const PlayArtist = () => {
   const location = useLocation();
   const [isPlaying, setIsPlaying] = useState(false);

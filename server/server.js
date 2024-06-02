@@ -22,7 +22,7 @@ app.use("/uploads/", express.static(path.join(__dirname, "uploads")));
 app.use(multerMiddleware);
 
 app.use(express.json());
-//--------------------DB----------------------//
+
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,

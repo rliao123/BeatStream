@@ -2,6 +2,7 @@ import { Playlist } from "../models/playlist.js";
 import { User } from "../models/user.js";
 import { Song } from "../models/song.js";
 
+// Create a new playlist for user with provided name and imageURL
 const createPlaylist = async (req, res) => {
   const { email } = req.params;
 
@@ -14,7 +15,6 @@ const createPlaylist = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Create a new playlist
     const playlist = new Playlist({
       userId: user._id,
       playlistName: playlistName,
@@ -33,6 +33,7 @@ const createPlaylist = async (req, res) => {
   }
 };
 
+// Find all playlists associated with the user
 const getAllPlaylists = async (req, res) => {
   const { email } = req.params;
 
@@ -43,7 +44,6 @@ const getAllPlaylists = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Find all playlists associated with the user
     const playlists = await Playlist.find({ userId: user._id });
 
     res.status(200).json(playlists);
@@ -52,6 +52,7 @@ const getAllPlaylists = async (req, res) => {
   }
 };
 
+// Get playlist details (playlist name, image, songs, number of songs)
 const getPlaylistDetails = async (req, res) => {
   const { playlistId } = req.params;
 
@@ -68,6 +69,7 @@ const getPlaylistDetails = async (req, res) => {
   }
 };
 
+// Add a song to playlist's songs array and update num of songs
 const addToPlaylist = async (req, res) => {
   const { playlistId } = req.params;
   const { songId } = req.body;
@@ -85,10 +87,7 @@ const addToPlaylist = async (req, res) => {
       return res.status(404).json({ message: "Song not found" });
     }
 
-    // Add the song to the playlist's songs array
     playlist.songs.push(song);
-
-    // Update the number of songs in the playlist
     playlist.numOfSongs = playlist.songs.length;
 
     await playlist.save();
@@ -101,6 +100,7 @@ const addToPlaylist = async (req, res) => {
   }
 };
 
+// Remove the song from the playlist's songs array and update num of songs in playlist
 const deleteFromPlaylist = async (req, res) => {
   const { playlistId, songId } = req.params;
 
@@ -111,7 +111,6 @@ const deleteFromPlaylist = async (req, res) => {
       return res.status(404).json({ message: "Playlist not found" });
     }
 
-    // Remove the song from the playlist's songs array
     const songIndex = playlist.songs.indexOf(songId);
 
     if (songIndex === -1) {
@@ -119,8 +118,6 @@ const deleteFromPlaylist = async (req, res) => {
     }
 
     playlist.songs.splice(songIndex, 1);
-
-    // Update the number of songs in the playlist
     playlist.numOfSongs = playlist.songs.length;
 
     await playlist.save();
@@ -133,6 +130,7 @@ const deleteFromPlaylist = async (req, res) => {
   }
 };
 
+// Update playlist details
 const updatePlaylist = async (req, res) => {
   const { playlistId } = req.params;
   const { playlistName, playlistImage } = req.body;
@@ -157,11 +155,11 @@ const updatePlaylist = async (req, res) => {
   }
 };
 
+// Delete playlist via playlist id
 const deletePlaylist = async (req, res) => {
   const { playlistId } = req.params;
 
   try {
-    // Find playlist by ID and delete it
     const deletedPlaylist = await Playlist.findByIdAndDelete(playlistId);
 
     if (!deletedPlaylist) {

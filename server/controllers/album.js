@@ -1,6 +1,7 @@
 import { Album } from "../models/album.js";
 import { User } from "../models/user.js";
 
+// Find all albums associated with the user
 const getAllAlbums = async (req, res) => {
   const { email } = req.params;
 
@@ -11,7 +12,6 @@ const getAllAlbums = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Find all albums associated with the user
     const albums = await Album.find({ userId: user._id });
 
     res.status(200).json(albums);

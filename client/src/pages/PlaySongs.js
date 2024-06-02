@@ -3,6 +3,9 @@ import axios from "axios";
 import Header from "../components/Header";
 import "./Play.css";
 
+/**
+ * Play songs from all songs in user's library
+ */
 const PlaySongs = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);

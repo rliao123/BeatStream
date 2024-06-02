@@ -2,6 +2,9 @@ import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import "./UserDashboard.css";
 
+/**
+ * Navigate to songs, playlist, artist, albums pages
+ */
 const UserDashboard = ({ userDetails }) => {
   return (
     <div className="user-profile">

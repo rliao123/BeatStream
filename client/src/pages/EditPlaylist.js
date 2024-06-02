@@ -5,6 +5,9 @@ import { TextField, Button } from "@mui/material";
 import "./AddSong.css";
 import axios from "axios";
 
+/**
+ * Edit playlist details and save the changes
+ */
 const EditPlaylist = () => {
   const [playlistName, setPlaylistName] = useState("");
   const [playlistImage, setPlaylistImage] = useState("");

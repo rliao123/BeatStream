@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ArtistComponent.css";
 
+/**
+ * Fetches all albums in user's library and allows user to play a specific album
+ */
 const AlbumComponent = () => {
   const [albums, setAlbums] = useState([]);
   const userEmail = localStorage.getItem("email");

@@ -5,6 +5,7 @@ import { Album } from "../models/album.js";
 import { Playlist } from "../models/playlist.js";
 import fs from "fs";
 
+// Add song to library
 const addSong = async (req, res) => {
   const { email } = req.params;
 
@@ -52,7 +53,6 @@ const addSong = async (req, res) => {
       });
     }
 
-    // Create a new song entry with the artist ID
     const song = new Song({
       userId: user._id,
       title: title,
@@ -77,11 +77,11 @@ const addSong = async (req, res) => {
   }
 };
 
+// Find all songs matching user
 const getSongs = async (req, res) => {
   const { email } = req.params;
 
   try {
-    // Find all songs matching user
     const user = await User.findOne({ email });
     const songs = await Song.find({ userId: user._id });
 
@@ -91,6 +91,7 @@ const getSongs = async (req, res) => {
   }
 };
 
+// Get song details
 const getSongDetails = async (req, res) => {
   const { songId } = req.params;
 
@@ -107,6 +108,7 @@ const getSongDetails = async (req, res) => {
   }
 };
 
+// Delete song, update artists songs array, update playlists with that song, remove song file
 const deleteSong = async (req, res) => {
   const { id } = req.params;
 
@@ -122,7 +124,7 @@ const deleteSong = async (req, res) => {
     if (!artist) {
       return res.status(404).json({ message: "Artist not found" });
     }
-    //update artist songIds array
+
     artist.songIds = artist.songIds.filter(
       (songId) => songId.toString() !== id
     );

@@ -7,6 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
 import "./AddSong.css";
 
+/**
+ * Add song to user's library and upload .mp3 file
+ */
 const AddSong = () => {
   const [songName, setSongName] = useState("");
   const [artistName, setArtistName] = useState("");

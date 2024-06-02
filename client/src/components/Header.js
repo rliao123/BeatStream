@@ -5,6 +5,9 @@ import "./Header.css";
 import Cookies from "js-cookie";
 import axios from "axios";
 
+/**
+ * Header bar with user dashboard hamburger button, user profile button, sign in/out button
+ */
 const Header = () => {
   const navigate = useNavigate();
   const [openSnackbar, setOpenSnackbar] = useState(false);

@@ -1,6 +1,7 @@
 import { Artist } from "../models/artist.js";
 import { User } from "../models/user.js";
 
+// Find all artists associated with the user
 const getAllArtists = async (req, res) => {
   const { email } = req.params;
 
@@ -11,7 +12,6 @@ const getAllArtists = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Find all artists associated with the user
     const artists = await Artist.find({ userId: user._id });
 
     res.status(200).json(artists);

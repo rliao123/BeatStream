@@ -5,6 +5,9 @@ import { TextField, Button } from "@mui/material";
 import "./AddSong.css";
 import axios from "axios";
 
+/**
+ * Create playlist and add to user's playlist collection
+ */
 const CreatePlaylist = () => {
   const [playlistName, setPlaylistName] = useState("");
   const [playlistImage, setPlaylistImage] = useState("");

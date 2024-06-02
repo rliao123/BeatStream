@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ArtistComponent.css";
 
+/**
+ * Fetches all artists in user's library and allows user to play a specific artist
+ */
 const ArtistComponent = () => {
   const [artists, setArtists] = useState([]);
   const userEmail = localStorage.getItem("email");

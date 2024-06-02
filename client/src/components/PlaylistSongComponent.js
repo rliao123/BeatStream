@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../pages/Song.css";
 
+/**
+ * View the details of a playlist and delete songs from playlist
+ */
 const PlaylistSongComponent = () => {
   const [songs, setSongs] = useState([]);
   const playlistId = localStorage.getItem("playlistId");

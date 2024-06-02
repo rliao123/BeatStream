@@ -3,6 +3,9 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./PlaylistComponent.css";
 
+/**
+ * Fetches all of user's playlists and displays each playlist with their image and name
+ */
 const PlaylistComponent = () => {
   const [playlists, setPlaylists] = useState([]);
   const userEmail = localStorage.getItem("email");

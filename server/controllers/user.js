@@ -11,8 +11,6 @@ const register = async (req, res) => {
       error: "Email already exists",
     });
 
-  // create new user if username and email are unique
-
   const user = new User(req.body);
   await user.save();
   res.status(201).json({
@@ -131,9 +129,4 @@ const getUserDetails = async (req, res) => {
   }
 };
 
-export { register };
-export { homepage };
-export { login };
-export { logout };
-export { validate };
-export { getUserDetails };
+export { register, homepage, login, logout, validate, getUserDetails };

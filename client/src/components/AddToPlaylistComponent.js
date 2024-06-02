@@ -4,6 +4,9 @@ import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import "../pages/Song.css";
 
+/**
+ * Displays all songs from user's collection and allows user to add songs to the playlist they selected.
+ */
 const AddToPlaylistComponent = () => {
   const [songs, setSongs] = useState([]);
   const userEmail = localStorage.getItem("email");
