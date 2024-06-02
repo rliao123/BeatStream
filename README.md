@@ -131,3 +131,8 @@ Install the following:
 <img width="1440" alt="Screen Shot 2024-05-31 at 9 12 53 PM" src="https://github.com/rliao123/BeatStream/assets/92598518/6f027100-84f7-4294-bfa8-7c3ce9c75fdd">
 2. Click the "Play" button to start playing songs.
 
+**Example Purposes Only:**
+
+- **MP3 Files and Images:** Any MP3 files and images used in the application are for example purposes only. They are intended to demonstrate the functionality of the application and are not meant for distribution or commercial use.
+
+- **User Responsibility:** Users are responsible for ensuring that any media content they upload complies with all applicable copyright laws. Users should have the appropriate rights or permissions to use and distribute any MP3 files or images uploaded to the application.
